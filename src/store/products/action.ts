@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
-import { Product, ProductFormData, ProductsResponse } from "../types";
+import { Product, ProductsResponse } from "../types";
 
 export const getProducts = createAppAsyncThunk(
   "products/getProducts",
@@ -14,7 +14,7 @@ export const getProducts = createAppAsyncThunk(
 
 export const createProduct = createAppAsyncThunk(
   "products/createProduct",
-  async (params: ProductFormData) => {
+  async (params: Product) => {
     const response = await axios.post<Product>(
       `http://${process.env.REACT_APP_API_URL}/api/product/create`,
       params
@@ -27,7 +27,7 @@ export const editProduct = createAppAsyncThunk(
   "products/editProduct",
   async (params: Product) => {
     const response = await axios.put<Product>(
-      `http://${process.env.REACT_APP_API_URL}/api/product/${params.id}`,
+      `http://${process.env.REACT_APP_API_URL}/api/product/update/${params.id}`,
       params
     );
     return response.data;

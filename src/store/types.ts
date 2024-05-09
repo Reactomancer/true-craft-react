@@ -12,19 +12,17 @@ export interface ProductCharacterstic {
 }
 
 export interface Product {
-  id: number;
+  id?: number;
   productName: string;
   description: string;
-  firstPrice: string;
-  currentPrice: string;
+  firstPrice: number;
+  currentPrice: number;
   discount: number;
   previewImageLink: string;
   rating: string;
   categoryId: number;
   characteristics: ProductCharacterstic[];
 }
-
-export type ProductFormData = Omit<Product, "id">;
 
 export interface CategoriesState {
   categories?: Category[];

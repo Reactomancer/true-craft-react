@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import AdminProduct from "../../components/AdminProduct";
 import { productsSelector } from "../../store/products/selectors";
-import { Product, ProductFormData } from "../../store/types";
+import { Product } from "../../store/types";
 import {
   createProduct,
   deleteProduct,
@@ -15,12 +15,15 @@ const AddProductPageContainer: React.FC = () => {
   const products = useAppSelector(productsSelector);
   const dispatch = useAppDispatch();
 
-  const handleAddProduct = (params: ProductFormData) => {
+  const handleAddProduct = (params: Product) => {
+    console.log(params);
     dispatch(createProduct(params));
   };
 
   const handleDeleteProduct = (params: Product) => {
-    dispatch(deleteProduct(params.id));
+    if (params.id) {
+      dispatch(deleteProduct(params.id));
+    }
   };
 
   const handleEditProduct = (params: Product) => {

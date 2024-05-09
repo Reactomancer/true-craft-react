@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { Product, ProductFormData } from "../store/types";
+import { Product } from "../store/types";
 import AddDialog from "./AddDialog";
 import AddProductForm from "./addProductForm";
 
 interface Props {
   products?: Product[];
-  onCreate: SubmitHandler<ProductFormData>;
+  onCreate: SubmitHandler<Product>;
   onDelete: (product: Product) => void;
   onEdit: (product: Product) => void;
 }
@@ -19,15 +19,17 @@ const AdminProduct: React.FC<Props> = ({
   onEdit: handleEditProduct,
 }) => {
   const [addCat, setAddCat] = useState(false);
-  const [editProductId, setEditProductId] = useState<number | null>(null);
-  const [editableName, setEditableName] = useState("");
-  const [editablePhotoLink, setEditablePhotoLink] = useState("");
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
 
-  const handleEdit = (product: Product) => {
-    setEditProductId(product.id);
-    setEditableName(product.productName);
-    setEditablePhotoLink(product.previewImageLink);
-    setAddCat(true);
+  const handleEditClick = (product: Product) => {
+    setCurrentProduct(product);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveChanges = (updatedProductData: Product) => {
+    handleEditProduct({ ...currentProduct, ...updatedProductData });
+    setIsEditModalOpen(false);
   };
 
   const handleClickOpen = () => {
@@ -71,9 +73,7 @@ const AdminProduct: React.FC<Props> = ({
               <th scope="col" className="px-6 py-3">
                 Category ID
               </th>
-              <th scope="col" className="px-6 py-3">
-                Characteristics
-              </th>
+
               <th scope="col" className="px-6 py-3">
                 Actions
               </th>
@@ -85,10 +85,15 @@ const AdminProduct: React.FC<Props> = ({
                 <td className="px-6 py-4">{product.productName}</td>
                 <td className="px-6 py-4">{product.description}</td>
                 <td className="px-6 py-4">{product.firstPrice}</td>
-                {product.discount > 0 && (
+                {product.discount > 0 ? (
                   <>
                     <td className="px-6 py-4">{product.currentPrice}</td>
                     <td className="px-6 py-4">{product.discount}%</td>
+                  </>
+                ) : (
+                  <>
+                    <td className="px-6 py-4">{product.currentPrice}</td>
+                    <td className="px-6 py-4">No Discount</td>
                   </>
                 )}
                 <td className="px-6 py-4">
@@ -101,11 +106,8 @@ const AdminProduct: React.FC<Props> = ({
                 <td className="px-6 py-4">{product.rating}/5</td>
                 <td className="px-6 py-4">{product.categoryId}</td>
                 <td className="px-6 py-4">
-                  {product.characteristics?.join("")}
-                </td>
-                <td className="px-6 py-4">
                   <button
-                    onClick={() => handleEditProduct(product)}
+                    onClick={() => handleEditClick(product)}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline pr-2"
                   >
                     Edit
@@ -128,13 +130,25 @@ const AdminProduct: React.FC<Props> = ({
             onClick={handleClickOpen}
             className="px-7 py-3 m-6 bg-blue-900 inline-block shadow-md rounded-full"
           >
-            Add Category
+            Add Product
           </button>
         )}
       </div>
       <AddDialog onClose={handleClose} open={addCat}>
         <div className="flex flex-row"></div>
         <AddProductForm onSubmit={handleAddProduct} onClose={handleClose} />
+      </AddDialog>
+      <AddDialog
+        open={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+      >
+        {currentProduct && (
+          <AddProductForm
+            initialData={currentProduct}
+            onSubmit={handleSaveChanges} //error
+            onClose={() => setIsEditModalOpen(false)}
+          />
+        )}
       </AddDialog>
     </>
   );

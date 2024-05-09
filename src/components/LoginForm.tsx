@@ -16,7 +16,7 @@ export const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-[96px] font-bold">Welcome Back !</h1>
-      <h2 className="text-[24px] mb-[70px]">Please login in to continue</h2>
+      <h2 className="text-[24px] mb-[20px]">Please login in to continue</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center items-center"

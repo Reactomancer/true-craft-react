@@ -42,6 +42,12 @@ const SearchBar: React.FC<Props> = ({ user }) => {
           <>
             <NavLink to={"/login"}>Login</NavLink>
             <NavLink to={"/register"}>Sign up</NavLink>
+            <NavLink to={"/"} className="text-6xl">
+              ♡
+            </NavLink>
+            <NavLink to={"/checkout"} className="text-3xl">
+              🛒
+            </NavLink>
           </>
         )}
       </div>
