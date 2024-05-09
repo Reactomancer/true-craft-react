@@ -39,6 +39,7 @@ const AdminProduct: React.FC<Props> = ({
   const handleClose = () => {
     setAddCat(false);
   };
+  console.log(products);
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -156,7 +157,7 @@ const AdminProduct: React.FC<Props> = ({
         {currentProduct && (
           <AddProductForm
             initialData={currentProduct}
-            onSubmit={handleSaveChanges} //error
+            onSubmit={handleSaveChanges}
             onClose={() => setIsEditModalOpen(false)}
           />
         )}

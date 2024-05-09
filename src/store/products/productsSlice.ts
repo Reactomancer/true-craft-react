@@ -5,6 +5,7 @@ import {
   deleteProduct,
   editProduct,
   getProducts,
+  getProductsByCategoryId,
 } from "./action";
 
 const initialState: ProductsState = {
@@ -21,6 +22,10 @@ export const productsSlice = createSlice({
       state.loading = true;
     });
     addCase(getProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.products = action.payload.products;
+    });
+    addCase(getProductsByCategoryId.fulfilled, (state, action) => {
       state.loading = false;
       state.products = action.payload.products;
     });

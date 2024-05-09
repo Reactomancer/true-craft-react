@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const TopSales: React.FC = () => {
   const data = [
-    { title: "Beads", image: "/images/beads.png" },
-    { title: "Pharaonic papyrus", image: "/images/ceramic.jpeg" },
-    { title: "Ceramic", image: "/images/pharoh.jpeg" },
+    { title: "Beads", image: "/images/beads.png", link: "1" },
+    { title: "Pharaonic papyrus", image: "/images/ceramic.jpeg", link: "2" },
+    { title: "Ceramic", image: "/images/pharoh.jpeg", link: "3" },
   ];
   return (
     <>
@@ -17,7 +17,7 @@ const TopSales: React.FC = () => {
               <div className="felx flex-row justify-between items-center">
                 <div className="flex flex-col justify-center items-center gap-10 py-10">
                   <img src={item.image} className="rounded-full w-44 h-44" />
-                  <Link to={"/"}>
+                  <Link to={`/catalog/${item.link}`}>
                     <button className="w-[400px] py-5 rounded-full bg-white text-3xl">
                       {item.title}
                     </button>

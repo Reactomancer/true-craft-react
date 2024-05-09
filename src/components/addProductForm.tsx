@@ -44,18 +44,16 @@ const AddProductForm: FC<AddProductFormProps> = ({
           previewImageLink: initialData.previewImageLink,
           rating: initialData.rating,
           categoryId: initialData.categoryId,
-          characteristics: initialData.characteristics || [
-            { key: "", value: "" },
-          ],
+          productMeta: initialData.productMeta || [{ key: "", value: "" }],
         }
       : {
-          characteristics: [{ key: "", value: "" }],
+          productMeta: [{ key: "", value: "" }],
         },
   });
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "characteristics",
+    name: "productMeta",
   });
 
   const [isDiscounted, setIsDiscounted] = useState(false);
@@ -235,13 +233,13 @@ const AddProductForm: FC<AddProductFormProps> = ({
         <div key={field.id} className="flex items-center gap-2">
           <TextField
             sx={textFieldStyles}
-            {...register(`characteristics.${index}.key`, { required: true })}
+            {...register(`productMeta.${index}.key`, { required: true })}
             label="Key"
             required
           />
           <TextField
             sx={textFieldStyles}
-            {...register(`characteristics.${index}.value`, { required: true })}
+            {...register(`productMeta.${index}.value`, { required: true })}
             label="Value"
             required
           />

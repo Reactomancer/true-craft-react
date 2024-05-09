@@ -23,6 +23,16 @@ export const createProduct = createAppAsyncThunk(
   }
 );
 
+export const getProductsByCategoryId = createAppAsyncThunk(
+  "products/getProductsByCategoryId",
+  async (id: string | undefined) => {
+    const response = await axios.get<ProductsResponse>(
+      `http://${process.env.REACT_APP_API_URL}/api/product/getAll/${id}`
+    );
+    return response.data;
+  }
+);
+
 export const editProduct = createAppAsyncThunk(
   "products/editProduct",
   async (params: Product) => {

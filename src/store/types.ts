@@ -7,7 +7,9 @@ export interface Category {
 export type CategoryFormData = Omit<Category, "id">;
 
 export interface ProductCharacterstic {
+  id?: number;
   key: string;
+  productId?: number;
   value: string;
 }
 
@@ -21,7 +23,7 @@ export interface Product {
   previewImageLink: string;
   rating: string;
   categoryId: number;
-  characteristics: ProductCharacterstic[];
+  productMeta: ProductCharacterstic[];
 }
 
 export interface CategoriesState {

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { CatalogPageContainer } from "../containers/CatalogPageContainer";
+import { getCategories } from "../store/categories/actions";
+import { useAppDispatch } from "../store/hooks";
 
-const CatalogProducts: React.FC = () => {
-  return <div>CatalogProducts</div>;
+export const CatalogProducts: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  return <CatalogPageContainer />;
 };
-
-export default CatalogProducts;

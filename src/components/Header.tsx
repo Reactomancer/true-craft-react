@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,18 +17,17 @@ const Header: React.FC = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setCurrency(event.target.value as string);
   };
+
   return (
     <header className="flex flex-row p-5 justify-between items-center">
-      <img
-        src="./images/logo.png"
-        alt="TrueCraft Logo"
-        className="h-auto w-1/4"
-      />
+      <Link className="w-1/4" to={"/"}>
+        <img src="./images/logo.png" alt="TrueCraft Logo" className="h-auto " />
+      </Link>
       <nav>
         <ul className="flex flex-row gap-16 text-2xl">
           {navigationLinks.map((link) => {
             return (
-              <li>
+              <li key={link.name}>
                 <NavLink to={link.link}>{link.name}</NavLink>
               </li>
             );

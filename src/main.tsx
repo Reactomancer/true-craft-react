@@ -10,14 +10,16 @@ import Login from "./pages/Login";
 import Checkout from "./pages/Checkout";
 import Product from "./pages/Product";
 import CatalogItems from "./pages/CatalogItems";
-import CatalogProducts from "./pages/CatalogProducts";
+import { CatalogProducts } from "./pages/CatalogProducts";
 import PageLayout from "./pages/Layouts/PageLayout";
 import { AdminPage } from "./pages/admin";
 import DashboardPage from "./containers/AdminPageContainer/dashboard";
 import { AddProductPage } from "./pages/admin/AddProductPage";
 import { AddCatPage } from "./pages/admin/AddCatPage";
 
-const router = createBrowserRouter([
+import "./store/users/middlewares";
+
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <PageLayout />,
@@ -28,11 +30,11 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <CatalogProducts /> },
           {
-            path: "items",
+            path: ":id",
             element: <CatalogItems />,
             children: [
               {
-                path: "product",
+                path: ":id",
                 element: <Product />,
               },
             ],
