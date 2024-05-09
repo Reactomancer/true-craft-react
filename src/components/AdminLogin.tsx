@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginFormData } from "../store/users/types";
 
 interface Props {
@@ -12,13 +12,19 @@ export const AdminLogin: React.FC<Props> = ({ onSubmit }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>();
+  const navigate = useNavigate();
+
+  const handleLoginAdmin = () => {
+    handleSubmit(onSubmit);
+    navigate("/admin/dashboard");
+  };
 
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-[96px] font-bold">Welcome Back !</h1>
       <h2 className="text-[24px] mb-[70px]">Please login in to continue</h2>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleLoginAdmin}
         className="flex flex-col justify-center items-center"
       >
         <div className="flex flex-col justify-center items-center mb-[50px]">

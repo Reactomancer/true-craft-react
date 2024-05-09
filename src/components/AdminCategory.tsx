@@ -104,7 +104,14 @@ const AdminCategory: React.FC<Props> = ({
                         onChange={(e) => setEditablePhotoLink(e.target.value)}
                       />
                     ) : (
-                      <p>{category.previewImageLink}</p>
+                      <a href={category.previewImageLink} target="_blank">
+                        <img
+                          src={category.previewImageLink}
+                          alt={category.categoryName}
+                          width={40}
+                          height={40}
+                        />
+                      </a>
                     )}
                   </td>
                   <td className="flex flex-row justify-center items-center gap-5 py-3">

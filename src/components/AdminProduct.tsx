@@ -81,9 +81,16 @@ const AdminProduct: React.FC<Props> = ({
           </thead>
           <tbody>
             {products?.map((product) => (
-              <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td className="px-6 py-4">{product.productName}</td>
-                <td className="px-6 py-4">{product.description}</td>
+              <tr
+                key={product.id}
+                className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+              >
+                <td className="px-6 py-4 truncate max-w-72">
+                  {product.productName}
+                </td>
+                <td className="px-6 py-4 truncate max-w-72">
+                  {product.description}
+                </td>
                 <td className="px-6 py-4">{product.firstPrice}</td>
                 {product.discount > 0 ? (
                   <>
@@ -103,7 +110,11 @@ const AdminProduct: React.FC<Props> = ({
                     className="w-10 h-10"
                   />
                 </td>
-                <td className="px-6 py-4">{product.rating}/5</td>
+                {product.rating ? (
+                  <td className="px-6 py-4">{product.rating}/5</td>
+                ) : (
+                  <td className="px-6 py-4">No Rating</td>
+                )}
                 <td className="px-6 py-4">{product.categoryId}</td>
                 <td className="px-6 py-4">
                   <button
