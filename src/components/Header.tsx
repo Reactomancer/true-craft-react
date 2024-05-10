@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const Header: React.FC = () => {
   const [currency, setCurrency] = React.useState("EGP");
+  const [language, setLanguage] = React.useState("ENG");
   const navigationLinks = [
     { name: "Home", link: "/" },
     { name: "Shop", link: "/catalog" },
@@ -16,6 +17,9 @@ const Header: React.FC = () => {
   ];
   const handleChange = (event: SelectChangeEvent) => {
     setCurrency(event.target.value as string);
+  };
+  const handleChangeLang = (event: SelectChangeEvent) => {
+    setLanguage(event.target.value as string);
   };
 
   return (
@@ -28,13 +32,36 @@ const Header: React.FC = () => {
           {navigationLinks.map((link) => {
             return (
               <li key={link.name}>
-                <NavLink to={link.link}>{link.name}</NavLink>
+                <NavLink className="hover:text-blue-700" to={link.link}>
+                  {link.name}
+                </NavLink>
               </li>
             );
           })}
         </ul>
       </nav>
-      <Box sx={{ minWidth: 120 }}>
+      <Box
+        sx={{
+          minWidth: 120,
+          display: "flex",
+          flexDirection: "row",
+          gap: "20px",
+        }}
+      >
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Language:</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={language}
+            label="Language:"
+            onChange={handleChangeLang}
+          >
+            <MenuItem value={"ENG"}>ENG</MenuItem>
+            <MenuItem value={"ARA"}>ARA</MenuItem>
+            <MenuItem value={"RUS"}>RUS</MenuItem>
+          </Select>
+        </FormControl>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Currency:</InputLabel>
           <Select
