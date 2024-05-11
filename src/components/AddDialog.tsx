@@ -26,7 +26,7 @@ const AddDialog: React.FC<DialogProps> = ({
       fullWidth={true}
       scroll="paper"
     >
-      <DialogTitle sx={{ color: "white" }}>Add New Product</DialogTitle>
+      <DialogTitle sx={{ color: "white" }}>Add New Category</DialogTitle>
       <DialogContent>{children}</DialogContent>
     </Dialog>
   );

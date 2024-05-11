@@ -55,16 +55,14 @@ const AdminProduct: React.FC<Props> = ({
               <th scope="col" className="px-6 py-3">
                 First Price
               </th>
-              {products?.some((product) => product.discount > 0) && (
-                <>
-                  <th scope="col" className="px-6 py-3">
-                    Current Price
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Discount
-                  </th>
-                </>
-              )}
+
+              <th scope="col" className="px-6 py-3">
+                Current Price
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Discount
+              </th>
+
               <th scope="col" className="px-6 py-3">
                 Preview Image
               </th>
