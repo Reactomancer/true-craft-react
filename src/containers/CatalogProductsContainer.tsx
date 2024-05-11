@@ -16,11 +16,15 @@ export const CatalogProductsContainer: React.FC<Props> = ({ categoryId }) => {
       <div className="my-[66px] bg-[#FDF2E9] py-20 flex justify-center text-3xl font-bold">
         {category ? <h1>{category?.categoryName}</h1> : <p>Loading...</p>}
       </div>
-      <div className="p-10 flex flex-row flex-wrap gap-10 items-center justify-center border-b border-b-black">
-        {products?.map((product) => (
-          <ProductCard product={product} />
-        ))}
-      </div>
+      {products?.length ? (
+        <div className="p-10 flex flex-row flex-wrap gap-10 items-center justify-center border-b border-b-black">
+          {products?.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-2xl">No Products</p>
+      )}
     </div>
   );
 };
