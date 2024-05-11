@@ -11,7 +11,7 @@ const Product: React.FC = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  return <div>Product{productId}</div>;
+  return <div>{productId}</div>;
 };
 
 export default Product;

@@ -19,7 +19,7 @@ export const CatalogProductsContainer: React.FC<Props> = ({ categoryId }) => {
       {products?.length ? (
         <div className="p-10 flex flex-row flex-wrap gap-10 items-center justify-center border-b border-b-black">
           {products?.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
