@@ -30,11 +30,11 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <CatalogProducts /> },
           {
-            path: ":id",
+            path: ":categoryId",
             element: <CatalogItems />,
             children: [
               {
-                path: ":id",
+                path: ":productId",
                 element: <Product />,
               },
             ],
