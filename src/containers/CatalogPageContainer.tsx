@@ -14,7 +14,7 @@ export const CatalogPageContainer: React.FC = () => {
       </div>
       <div className="p-10 flex flex-row flex-wrap gap-10 items-center justify-center border-b border-b-black">
         {categories?.map((category) => (
-          <Link to={`${category.id}`}>
+          <Link key={category.id} to={`${category.id}`}>
             <CatalogCard key={category.id} category={category} />
           </Link>
         ))}
