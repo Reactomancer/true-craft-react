@@ -4,6 +4,7 @@ import {
   createProduct,
   deleteProduct,
   editProduct,
+  getProductById,
   getProducts,
   getProductsByCategoryId,
 } from "./action";
@@ -40,6 +41,10 @@ export const productsSlice = createSlice({
     addCase(createProduct.fulfilled, (state, action) => {
       state.loading = false;
       state.products?.push(action.payload);
+    });
+    addCase(getProductById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.product = action.payload;
     });
     addCase(createProduct.rejected, (state) => {
       state.loading = false;

@@ -13,6 +13,16 @@ export interface ProductCharacterstic {
   value: string;
 }
 
+export interface Reviews {
+  id: number;
+  rating: number;
+  reviewText: string;
+  isVerified: boolean;
+  userName: string;
+  userId: number;
+  productId: number;
+}
+
 export interface Product {
   id?: number;
   productName: string;
@@ -24,6 +34,7 @@ export interface Product {
   rating: string;
   categoryId: number;
   productMeta: ProductCharacterstic[];
+  reviews?: Reviews[];
 }
 
 export interface CategoriesState {
@@ -34,6 +45,7 @@ export interface CategoriesState {
 
 export interface ProductsState {
   products?: Product[];
+  product?: Product;
   loading: boolean;
   error: string | null;
 }

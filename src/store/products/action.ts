@@ -53,3 +53,13 @@ export const deleteProduct = createAppAsyncThunk(
     return response.data;
   }
 );
+
+export const getProductById = createAppAsyncThunk(
+  "products/getProductById",
+  async (id: string | undefined) => {
+    const response = await axios.get<Product>(
+      `http://${process.env.REACT_APP_API_URL}/api/product/${id}`
+    );
+    return response.data;
+  }
+);
