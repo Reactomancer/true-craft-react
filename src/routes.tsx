@@ -11,6 +11,7 @@ import { AdminPage } from "./pages/admin";
 import DashboardPage from "./containers/AdminPageContainer/dashboard";
 import { AddProductPage } from "./pages/admin/AddProductPage";
 import { AddCatPage } from "./pages/admin/AddCatPage";
+import SearchPage from "./pages/SearchPage";
 
 export const routes = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ export const routes = createBrowserRouter([
     element: <PageLayout />,
     children: [
       { path: "", element: <HomePage /> },
+      { path: "/search/:searchText", element: <SearchPage /> },
       {
         path: "catalog",
         children: [

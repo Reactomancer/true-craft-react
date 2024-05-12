@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
-import { Product, ProductsResponse } from "../types";
+import { Product, ProductSearchParams, ProductsResponse } from "../types";
 
 export const getProducts = createAppAsyncThunk(
   "products/getProducts",
@@ -59,6 +59,16 @@ export const getProductById = createAppAsyncThunk(
   async (id: string | undefined) => {
     const response = await axios.get<Product>(
       `http://${process.env.REACT_APP_API_URL}/api/product/${id}`
+    );
+    return response.data;
+  }
+);
+
+export const searchProducts = createAppAsyncThunk(
+  "products/searchProducts",
+  async (params: ProductSearchParams) => {
+    const response = await axios.get<ProductsResponse>(
+      `http://${process.env.REACT_APP_API_URL}/api/product/search/${params.searchText}`
     );
     return response.data;
   }

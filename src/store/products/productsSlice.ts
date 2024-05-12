@@ -7,6 +7,7 @@ import {
   getProductById,
   getProducts,
   getProductsByCategoryId,
+  searchProducts,
 } from "./action";
 
 const initialState: ProductsState = {
@@ -22,10 +23,12 @@ export const productsSlice = createSlice({
     addCase(getProducts.pending, (state) => {
       state.loading = true;
     });
+
     addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.products = action.payload.products;
     });
+
     addCase(getProductsByCategoryId.fulfilled, (state, action) => {
       state.loading = false;
       state.products = action.payload.products;
@@ -38,14 +41,22 @@ export const productsSlice = createSlice({
     addCase(createProduct.pending, (state) => {
       state.loading = true;
     });
+
     addCase(createProduct.fulfilled, (state, action) => {
       state.loading = false;
       state.products?.push(action.payload);
     });
+
+    addCase(searchProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.search = action.payload.products;
+    });
+
     addCase(getProductById.fulfilled, (state, action) => {
       state.loading = false;
       state.product = action.payload;
     });
+
     addCase(createProduct.rejected, (state) => {
       state.loading = false;
       state.error = "Failed to fetch products";

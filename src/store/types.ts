@@ -45,6 +45,7 @@ export interface CategoriesState {
 
 export interface ProductsState {
   products?: Product[];
+  search?: Product[];
   product?: Product;
   loading: boolean;
   error: string | null;
@@ -56,4 +57,8 @@ export interface CategoriesResponse {
 
 export interface ProductsResponse {
   products: Product[];
+}
+
+export interface ProductSearchParams {
+  searchText: string;
 }

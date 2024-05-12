@@ -5,9 +5,10 @@ import { UserData } from "../store/users/types";
 
 interface Props {
   user?: UserData;
+  onSearch: (searchText: string) => void;
 }
 
-const SearchBar: React.FC<Props> = ({ user }) => {
+const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
   const [search, setSearch] = useState("");
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
@@ -23,7 +24,12 @@ const SearchBar: React.FC<Props> = ({ user }) => {
           size="medium"
         />
         <Divider sx={{ height: 50, m: 1 }} orientation="vertical" />
-        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+        <IconButton
+          onClick={() => handleSearchClick(search)}
+          type="button"
+          sx={{ p: "10px" }}
+          aria-label="search"
+        >
           <img src="/images/search-icon.png" className="w-[44px]" />
         </IconButton>
       </div>

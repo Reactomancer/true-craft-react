@@ -7,18 +7,23 @@ import SearchBar from "../../components/SearchBar";
 import { userByIdSelector } from "../../store/users/selectors";
 import Footer from "../../components/Footer";
 import SocialLinks from "../../components/SocialLinks";
+import { routes } from "../../routes";
 
 const PageLayout: React.FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUserData());
   }, [dispatch]);
-
   const user = useAppSelector(userByIdSelector);
+
+  const handleClickSearch = (searchText: string) => {
+    routes.navigate(`/search/${searchText}`);
+  };
+
   return (
     <>
       <Header />
-      <SearchBar user={user} />
+      <SearchBar onSearch={handleClickSearch} user={user} />
       <Outlet />
       <SocialLinks />
       <Footer />
