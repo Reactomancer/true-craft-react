@@ -79,15 +79,15 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           )}
           <div className="flex items-center justify-between ">
             {product.currentPrice === product.firstPrice ? (
-              <span className="text-3xl font-bold text-black">
+              <span className="text-xl font-bold text-black">
                 {convertedCurrentPrice}
               </span>
             ) : (
-              <div className="flex flex-row gap-16">
-                <span className="text-2xl font-bold  text-black">
+              <div className="flex flex-row gap-10">
+                <span className="text-xl font-bold  text-black">
                   {convertedCurrentPrice}
                 </span>
-                <span className="text-2xl font-bold text-black dark:text-red-800 line-through pr-2">
+                <span className="text-xl font-bold text-black dark:text-red-800 line-through pr-2">
                   {convertedFirstPrice}
                 </span>
               </div>
