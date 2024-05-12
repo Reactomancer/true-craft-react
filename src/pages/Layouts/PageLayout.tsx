@@ -17,7 +17,9 @@ const PageLayout: React.FC = () => {
   const user = useAppSelector(userByIdSelector);
 
   const handleClickSearch = (searchText: string) => {
-    routes.navigate(`/search/${searchText}`);
+    if (searchText && searchText != "") {
+      routes.navigate(`/search/${searchText}`);
+    }
   };
 
   return (
