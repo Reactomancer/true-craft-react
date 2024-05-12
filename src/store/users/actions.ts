@@ -55,5 +55,6 @@ export const getUserData = createAppAsyncThunk("user/getUserData", async () => {
     `http://${process.env.REACT_APP_API_URL}/api/auth/user`,
     config
   );
+
   return response.data;
 });

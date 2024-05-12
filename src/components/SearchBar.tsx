@@ -13,9 +13,10 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
   }
+
   return (
     <div className="flex justify-between items-center bg-[#FDF2E9] py-4">
-      <div className="flex felx-row w-3/4 px-5 mx-20 rounded-full items-center bg-white h-[82px]">
+      <div className="flex flex-row w-3/4 px-5 mx-20 rounded-full items-center bg-white h-[82px]">
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search"
