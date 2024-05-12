@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const TopSales: React.FC = () => {
   const data = [
     { title: "Beads", image: "/images/beads.png", link: "1" },
-    { title: "Pharaonic papyrus", image: "/images/ceramic.jpeg", link: "2" },
-    { title: "Ceramic", image: "/images/pharoh.jpeg", link: "3" },
+    { title: "Pharaonic papyrus", image: "/images/pharoh.jpeg", link: "2" },
+    { title: "Ceramic", image: "/images/ceramic.jpeg", link: "3" },
   ];
   return (
     <>

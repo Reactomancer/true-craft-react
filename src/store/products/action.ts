@@ -73,3 +73,13 @@ export const searchProducts = createAppAsyncThunk(
     return response.data;
   }
 );
+
+export const getBestSales = createAppAsyncThunk(
+  "products/bestSales",
+  async () => {
+    const response = await axios.get<ProductsResponse>(
+      `http://${process.env.REACT_APP_API_URL}/api/product/bestsales`
+    );
+    return response.data;
+  }
+);

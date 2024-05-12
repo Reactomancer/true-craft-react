@@ -4,6 +4,7 @@ import {
   createProduct,
   deleteProduct,
   editProduct,
+  getBestSales,
   getProductById,
   getProducts,
   getProductsByCategoryId,
@@ -33,6 +34,7 @@ export const productsSlice = createSlice({
       state.loading = false;
       state.products = action.payload.products;
     });
+
     addCase(getProducts.rejected, (state) => {
       state.loading = false;
       state.error = "Failed to fetch products";
@@ -57,16 +59,23 @@ export const productsSlice = createSlice({
       state.product = action.payload;
     });
 
+    addCase(getBestSales.fulfilled, (state, action) => {
+      state.loading = false;
+      state.bestSales = action.payload.products;
+    });
+
     addCase(createProduct.rejected, (state) => {
       state.loading = false;
       state.error = "Failed to fetch products";
     });
+
     addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;
       state.products = state.products?.filter(
         (product) => action.payload !== product.id
       );
     });
+
     addCase(editProduct.fulfilled, (state, action) => {
       state.loading = false;
       state.products = state.products?.map((category) => {

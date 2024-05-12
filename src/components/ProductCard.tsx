@@ -68,10 +68,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
               </span>
             ) : (
               <div className="flex flex-row gap-16">
-                <span className="text-3xl font-bold  text-black">
+                <span className="text-2xl font-bold  text-black">
                   {product.currentPrice} EGP
                 </span>
-                <span className="text-3xl font-bold text-black dark:text-red-800 line-through">
+                <span className="text-2xl font-bold text-black dark:text-red-800 line-through pr-2">
                   {product.firstPrice}
                 </span>
               </div>

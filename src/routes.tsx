@@ -12,6 +12,7 @@ import DashboardPage from "./containers/AdminPageContainer/dashboard";
 import { AddProductPage } from "./pages/admin/AddProductPage";
 import { AddCatPage } from "./pages/admin/AddCatPage";
 import SearchPage from "./pages/SearchPage";
+import BestSalesPage from "./pages/BestSalesPage";
 
 export const routes = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ export const routes = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "/search/:searchText", element: <SearchPage /> },
-      { path: "bestsales", element: <SearchPage /> },
+      { path: "bestsales", element: <BestSalesPage /> },
       {
         path: "catalog",
         children: [

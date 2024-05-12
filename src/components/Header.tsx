@@ -54,6 +54,10 @@ const Header: React.FC = () => {
             gap: "20px",
           }}
         >
+          <div
+            className="flex justify-end p-5 [&_div:first-child+span]:hidden"
+            id="google_translate_element"
+          />
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Currency:</InputLabel>
             <Select
@@ -70,10 +74,6 @@ const Header: React.FC = () => {
           </FormControl>
         </Box>
       </header>
-      <div
-        className="flex justify-end p-5 [&_span]:hidden"
-        id="google_translate_element"
-      />
     </>
   );
 };

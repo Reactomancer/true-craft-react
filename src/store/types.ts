@@ -45,6 +45,7 @@ export interface CategoriesState {
 
 export interface ProductsState {
   products?: Product[];
+  bestSales?: Product[];
   search?: Product[];
   product?: Product;
   loading: boolean;
