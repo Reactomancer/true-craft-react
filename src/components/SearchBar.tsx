@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Divider, IconButton, InputBase, Popover } from "@mui/material";
-import { UserData } from "../store/users/types";
+import { Favorite, UserData } from "../store/users/types";
 
 interface Props {
   user?: UserData;
@@ -13,6 +13,12 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
+
+  const navigate = useNavigate();
+  const handleNavigate = (item: Favorite) => {
+    navigate(`/catalog/${item.product?.categoryId}/${item.productId}`);
+    handleClose();
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -123,9 +129,9 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
         {user?.favorites?.length ? (
           <ul>
             {user.favorites?.map((item) => (
-              <Link
+              <button
                 className=" flex flex-row gap-3 p-4 items-center"
-                to={`/catalog/${item.product?.categoryId}/${item.productId}`}
+                onClick={() => handleNavigate(item)}
               >
                 <img
                   src={item.product.previewImageLink}
@@ -133,7 +139,7 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
                   height={100}
                 />
                 <p>{item.product.productName}</p>
-              </Link>
+              </button>
             ))}
           </ul>
         ) : (
