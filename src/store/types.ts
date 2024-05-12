@@ -83,3 +83,15 @@ export interface CurrencyResponse {
   target_code: string;
   conversion_rate: number;
 }
+
+export interface FavParams {
+  userId: number;
+  productId: number;
+}
+
+export interface FavResponse {
+  userId: number;
+  productId: number;
+  id: number;
+  product: Product;
+}

@@ -1,19 +1,30 @@
 import React from "react";
 import { Product } from "../store/types";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   conversionSelector,
   currencySelector,
 } from "../store/products/selectors";
+import { userByIdSelector } from "../store/users/selectors";
+import { addFav } from "../store/users/actions";
 
 interface Props {
   product: Product;
 }
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
+  const dispatch = useAppDispatch();
+
   const rate = useAppSelector(conversionSelector);
   const currency = useAppSelector(currencySelector);
+  const user = useAppSelector(userByIdSelector);
+
+  const handleAddFav = () => {
+    if (user?.id && product.id) {
+      dispatch(addFav({ userId: user?.id, productId: product.id }));
+    }
+  };
 
   const convertedCurrentPrice = `${((rate ?? 1) * product.currentPrice).toFixed(
     2
@@ -23,22 +34,28 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   )} ${currency ?? "EGP"}`;
 
   return (
-    <NavLink
-      to={`/catalog/${product.categoryId}/${product.id}`}
-      className="flex flex-col"
-    >
+    <div className="flex flex-col">
       <div className="w-full h-max max-w-sm rounded-lg shadow  border-gray-700">
-        <img
-          className="p-8 rounded-t-lg w-[382px] h-[382px]"
-          src={product.previewImageLink}
-          alt="product image"
-        />
+        <NavLink
+          to={`/catalog/${product.categoryId}/${product.id}`}
+          className="flex flex-col"
+        >
+          <img
+            className="p-8 rounded-t-lg w-[382px] h-[382px]"
+            src={product.previewImageLink}
+            alt="product image"
+          />
+        </NavLink>
 
         <div className="px-5 pb-5 flex flex-col gap-4">
-          <h5 className="text-xl h-[56px] font-semibold tracking-tight  text-black">
-            {product.productName}
-          </h5>
-
+          <NavLink
+            to={`/catalog/${product.categoryId}/${product.id}`}
+            className="flex flex-col"
+          >
+            <h5 className="text-xl h-[56px] font-semibold tracking-tight  text-black">
+              {product.productName}
+            </h5>
+          </NavLink>
           {product.rating ? (
             <div className="flex items-center mt-2.5 mb-5">
               <div className="flex items-center space-x-1 rtl:space-x-reverse">
@@ -94,10 +111,16 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
             )}
           </div>
           <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Add to cart
+            Add to Cart
+          </button>
+          <button
+            onClick={handleAddFav}
+            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+          >
+            Add to Wishlist
           </button>
         </div>
       </div>
-    </NavLink>
+    </div>
   );
 };

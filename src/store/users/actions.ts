@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
 import { LoginFormData, RegisterFormData } from "./types";
+import { FavParams, FavResponse } from "../types";
 
 export const loginUser = createAppAsyncThunk(
   "user/loginUser",
@@ -58,3 +59,14 @@ export const getUserData = createAppAsyncThunk("user/getUserData", async () => {
 
   return response.data;
 });
+
+export const addFav = createAppAsyncThunk(
+  "products/addFav",
+  async (params: FavParams) => {
+    const response = await axios.post<FavResponse>(
+      `http://${process.env.REACT_APP_API_URL}/api/favorites/add`,
+      params
+    );
+    return response.data;
+  }
+);
