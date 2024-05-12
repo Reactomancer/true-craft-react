@@ -6,9 +6,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useGoogleTranslate } from "../utils/use-google-translate";
+import { useAppDispatch } from "../store/hooks";
+import { convertCurrency } from "../store/products/action";
 
 const Header: React.FC = () => {
   const [currency, setCurrency] = useState("EGP");
+
+  const dispatch = useAppDispatch();
 
   const navigationLinks = [
     { name: "Home", link: "/" },
@@ -19,6 +23,7 @@ const Header: React.FC = () => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setCurrency(event.target.value as string);
+    dispatch(convertCurrency({ from: "EGP", to: event.target.value }));
   };
 
   useGoogleTranslate();

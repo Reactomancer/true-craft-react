@@ -46,6 +46,8 @@ export interface CategoriesState {
 export interface ProductsState {
   products?: Product[];
   bestSales?: Product[];
+  conversionRate?: number;
+  currency?: string;
   search?: Product[];
   product?: Product;
   loading: boolean;
@@ -62,4 +64,22 @@ export interface ProductsResponse {
 
 export interface ProductSearchParams {
   searchText: string;
+}
+
+export interface CurrencyParams {
+  from: string;
+  to: string;
+}
+
+export interface CurrencyResponse {
+  result: string;
+  documentation: string;
+  terms_of_use: string;
+  time_last_update_unix: number;
+  time_last_update_utc: string;
+  time_next_update_unix: number;
+  time_next_update_utc: string;
+  base_code: string;
+  target_code: string;
+  conversion_rate: number;
 }

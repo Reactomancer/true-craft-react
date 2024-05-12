@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductsState } from "../types";
 import {
+  convertCurrency,
   createProduct,
   deleteProduct,
   editProduct,
@@ -57,6 +58,12 @@ export const productsSlice = createSlice({
     addCase(getProductById.fulfilled, (state, action) => {
       state.loading = false;
       state.product = action.payload;
+    });
+
+    addCase(convertCurrency.fulfilled, (state, action) => {
+      state.loading = false;
+      state.conversionRate = action.payload.conversion_rate;
+      state.currency = action.payload.target_code;
     });
 
     addCase(getBestSales.fulfilled, (state, action) => {

@@ -5,7 +5,9 @@ import { ProductInfo } from "../components/ProductInfo";
 
 export const ProductContainer: React.FC = () => {
   const product = useAppSelector(productByIdSelector);
-
+  if (product == null) {
+    return null;
+  }
   return (
     <div>
       <div className="my-[66px] bg-[#FDF2E9] py-20 flex justify-center text-3xl font-bold">

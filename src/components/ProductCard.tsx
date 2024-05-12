@@ -1,11 +1,27 @@
 import React from "react";
 import { Product } from "../store/types";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
+import {
+  conversionSelector,
+  currencySelector,
+} from "../store/products/selectors";
 
 interface Props {
   product: Product;
 }
+
 export const ProductCard: React.FC<Props> = ({ product }) => {
+  const rate = useAppSelector(conversionSelector);
+  const currency = useAppSelector(currencySelector);
+
+  const convertedCurrentPrice = `${((rate ?? 1) * product.currentPrice).toFixed(
+    2
+  )} ${currency ?? "EGP"}`;
+  const convertedFirstPrice = `${((rate ?? 1) * product.firstPrice).toFixed(
+    2
+  )} ${currency ?? "EGP"}`;
+
   return (
     <NavLink
       to={`/catalog/${product.categoryId}/${product.id}`}
@@ -64,15 +80,15 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           <div className="flex items-center justify-between ">
             {product.currentPrice === product.firstPrice ? (
               <span className="text-3xl font-bold text-black">
-                {product.currentPrice} EGP
+                {convertedCurrentPrice}
               </span>
             ) : (
               <div className="flex flex-row gap-16">
                 <span className="text-2xl font-bold  text-black">
-                  {product.currentPrice} EGP
+                  {convertedCurrentPrice}
                 </span>
                 <span className="text-2xl font-bold text-black dark:text-red-800 line-through pr-2">
-                  {product.firstPrice}
+                  {convertedFirstPrice}
                 </span>
               </div>
             )}

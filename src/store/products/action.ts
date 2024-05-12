@@ -1,6 +1,12 @@
 import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
-import { Product, ProductSearchParams, ProductsResponse } from "../types";
+import {
+  CurrencyParams,
+  CurrencyResponse,
+  Product,
+  ProductSearchParams,
+  ProductsResponse,
+} from "../types";
 
 export const getProducts = createAppAsyncThunk(
   "products/getProducts",
@@ -79,6 +85,16 @@ export const getBestSales = createAppAsyncThunk(
   async () => {
     const response = await axios.get<ProductsResponse>(
       `http://${process.env.REACT_APP_API_URL}/api/product/bestsales`
+    );
+    return response.data;
+  }
+);
+
+export const convertCurrency = createAppAsyncThunk(
+  "products/convertCurrency",
+  async (params: CurrencyParams) => {
+    const response = await axios.get<CurrencyResponse>(
+      `https://v6.exchangerate-api.com/v6/7da99ad515d440eb48800b3b/pair/${params.from}/${params.to}`
     );
     return response.data;
   }

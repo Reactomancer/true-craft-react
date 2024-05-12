@@ -11,3 +11,8 @@ export const productSearchSelector = (state: RootState) =>
   state.products.search;
 
 export const bestSalesSelector = (state: RootState) => state.products.bestSales;
+
+export const conversionSelector = (state: RootState) =>
+  state.products.conversionRate;
+
+export const currencySelector = (state: RootState) => state.products.currency;

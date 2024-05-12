@@ -1,11 +1,26 @@
 import React from "react";
 import { Product } from "../store/types";
+import { useAppSelector } from "../store/hooks";
+import {
+  conversionSelector,
+  currencySelector,
+} from "../store/products/selectors";
 
 interface Props {
-  product?: Product;
+  product: Product;
 }
 
 export const ProductInfo: React.FC<Props> = ({ product }) => {
+  const rate = useAppSelector(conversionSelector);
+  const currency = useAppSelector(currencySelector);
+
+  const convertedCurrentPrice = `${((rate ?? 1) * product.currentPrice).toFixed(
+    2
+  )} ${currency ?? "EGP"}`;
+  const convertedFirstPrice = `${((rate ?? 1) * product.firstPrice).toFixed(
+    2
+  )} ${currency ?? "EGP"}`;
+
   return (
     <div className="  py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,9 +97,8 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
             <div className="flex mb-4 mt-4">
               <div className="mr-4">
                 <span className="font-bold text-gray-700 ">Price:</span>
-                <span className="text-gray-600 ">
-                  {product?.currentPrice} EGP
-                </span>
+                <span className="text-gray-600 ">{convertedCurrentPrice}</span>
+                {/* need to be edited */}
               </div>
             </div>
 
