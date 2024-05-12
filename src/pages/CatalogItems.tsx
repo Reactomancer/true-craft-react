@@ -7,6 +7,7 @@ import { getCategories } from "../store/categories/actions";
 
 const CatalogItems: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
+  console.log(categoryId);
   const dispatch = useAppDispatch();
 
   const fetchCategoriesAndProducts = useCallback(

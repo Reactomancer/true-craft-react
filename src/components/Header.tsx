@@ -14,7 +14,7 @@ const Header: React.FC = () => {
     { name: "Home", link: "/" },
     { name: "Shop", link: "/catalog" },
     { name: "Blog", link: "/" },
-    { name: "Best sales", link: "/catalog/items" },
+    { name: "Best sales", link: "/bestsales" },
   ];
 
   const handleChange = (event: SelectChangeEvent) => {
