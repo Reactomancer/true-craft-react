@@ -55,7 +55,7 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
         </IconButton>
       </div>
       <div className="flex flex-row w-1/4 justify-between items-center px-6 text-2xl">
-        {user ? (
+        {user?.firstName != null ? (
           <>
             <p>Welcome {user?.firstName?.toUpperCase()}</p>
             <IconButton id={id} onClick={handleClick}>
