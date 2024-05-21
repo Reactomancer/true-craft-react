@@ -2,6 +2,8 @@ import React from "react";
 import { useAppSelector } from "../store/hooks";
 import { productByIdSelector } from "../store/products/selectors";
 import { ProductInfo } from "../components/ProductInfo";
+import { RelatedItems } from "../components/RelatedItems";
+import { Feedback } from "../components/Feedback";
 
 export const ProductContainer: React.FC = () => {
   const product = useAppSelector(productByIdSelector);
@@ -14,6 +16,8 @@ export const ProductContainer: React.FC = () => {
         {product ? <h1>{product?.productName}</h1> : <p>Loading...</p>}
       </div>
       <ProductInfo product={product} />
+      <RelatedItems product={product} />
+      <Feedback />
     </div>
   );
 };
