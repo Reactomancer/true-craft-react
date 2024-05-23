@@ -1,10 +1,13 @@
 import React from "react";
 import { Product } from "../store/types";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   conversionSelector,
   currencySelector,
 } from "../store/products/selectors";
+import { addFav } from "../store/users/actions";
+import { userByIdSelector } from "../store/users/selectors";
+import { addToCart } from "../store/cart/actions";
 
 interface Props {
   product: Product;
@@ -13,6 +16,8 @@ interface Props {
 export const ProductInfo: React.FC<Props> = ({ product }) => {
   const rate = useAppSelector(conversionSelector);
   const currency = useAppSelector(currencySelector);
+  const user = useAppSelector(userByIdSelector);
+  const dispatch = useAppDispatch();
 
   const convertedCurrentPrice = `${((rate ?? 1) * product.currentPrice).toFixed(
     2
@@ -20,6 +25,18 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
   const convertedFirstPrice = `${((rate ?? 1) * product.firstPrice).toFixed(
     2
   )} ${currency ?? "EGP"}`;
+
+  const handleAddFav = () => {
+    if (user?.id && product.id) {
+      dispatch(addFav({ userId: user?.id, productId: product.id }));
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product.id) {
+      dispatch(addToCart({ productId: product.id }));
+    }
+  };
 
   return (
     <div className="  py-8">
@@ -35,12 +52,18 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
             </div>
             <div className="flex -mx-2 mb-4">
               <div className="w-1/2 px-2">
-                <button className="w-full bg-gray-900  text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ">
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full bg-gray-900  text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 "
+                >
                   Add to Cart
                 </button>
               </div>
               <div className="w-1/2 px-2">
-                <button className="w-full bg-gray-200  text-gray-800  py-2 px-4 rounded-full font-bold hover:bg-gray-300 ">
+                <button
+                  onClick={handleAddFav}
+                  className="w-full bg-gray-200  text-gray-800  py-2 px-4 rounded-full font-bold hover:bg-gray-300 "
+                >
                   Add to Wishlist
                 </button>
               </div>
@@ -96,9 +119,15 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
             )}
             <div className="flex mb-4 mt-4">
               <div className="mr-4">
-                <span className="font-bold text-gray-700 ">Price:</span>
-                <span className="text-gray-600 ">{convertedCurrentPrice}</span>
-                {/* need to be edited */}
+                <span className="font-bold text-gray-700">Price: </span>
+                <span className="text-gray-600 mr-4">
+                  {convertedCurrentPrice}
+                </span>
+                {convertedCurrentPrice !== convertedFirstPrice && (
+                  <span className="text-red-500 line-through">
+                    {convertedFirstPrice}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -111,8 +140,12 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
               </p>
               {product?.productMeta.map((charachterstic) => (
                 <div className="flex flex-row text-black">
-                  <p>{charachterstic.key} :</p>
-                  <p>&nbsp;{charachterstic.value}</p>
+                  <p className="text-[#8F8F8F]  text-lg">
+                    {charachterstic.key} :
+                  </p>
+                  <p className="text-[#8F8F8F] text-lg">
+                    &nbsp;{charachterstic.value}
+                  </p>
                 </div>
               ))}
             </div>
