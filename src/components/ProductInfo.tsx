@@ -1,10 +1,12 @@
 import React from "react";
 import { Product } from "../store/types";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   conversionSelector,
   currencySelector,
 } from "../store/products/selectors";
+import { userByIdSelector } from "../store/users/selectors";
+import { addFav } from "../store/users/actions";
 
 interface Props {
   product: Product;
@@ -20,6 +22,16 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
   const convertedFirstPrice = `${((rate ?? 1) * product.firstPrice).toFixed(
     2
   )} ${currency ?? "EGP"}`;
+
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector(userByIdSelector);
+
+  const handleAddFav = () => {
+    if (user?.id && product.id) {
+      dispatch(addFav({ userId: user?.id, productId: product.id }));
+    }
+  };
 
   return (
     <div className="  py-8">
@@ -40,7 +52,10 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
                 </button>
               </div>
               <div className="w-1/2 px-2">
-                <button className="w-full bg-gray-200  text-gray-800  py-2 px-4 rounded-full font-bold hover:bg-gray-300 ">
+                <button
+                  onClick={handleAddFav}
+                  className="w-full bg-gray-200  text-gray-800  py-2 px-4 rounded-full font-bold hover:bg-gray-300 "
+                >
                   Add to Wishlist
                 </button>
               </div>
@@ -96,9 +111,18 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
             )}
             <div className="flex mb-4 mt-4">
               <div className="mr-4">
-                <span className="font-bold text-gray-700 ">Price:</span>
-                <span className="text-gray-600 ">{convertedCurrentPrice}</span>
-                {/* need to be edited */}
+                <div>
+                  <span className="font-bold text-gray-700 ">Price: </span>
+                  <span className="text-gray-600 ">
+                    {convertedCurrentPrice}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-bold text-gray-700 ">Old Price: </span>
+                  <span className="text-gray-600 line-through ">
+                    {convertedFirstPrice}
+                  </span>
+                </div>
               </div>
             </div>
 

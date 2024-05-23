@@ -1,7 +1,8 @@
 import React from "react";
+import { CheckoutContainer } from "../containers/CheckoutContainer";
 
 const Checkout: React.FC = () => {
-  return <div>Checkout</div>;
+  return <CheckoutContainer />;
 };
 
 export default Checkout;
