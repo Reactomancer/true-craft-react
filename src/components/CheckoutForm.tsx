@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userByIdSelector } from "../store/users/selectors";
 import { submitOrder } from "../store/cart/actions";
+import { getUserCart } from "../store/cart/actions";
 
 type Inputs = { userId: number };
 
@@ -18,6 +19,11 @@ export const CheckoutComponunt: React.FC = () => {
   const handleSubmitOrder = (data) => {
     dispatch(submitOrder(data));
   };
+
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, [dispatch]);
+
   return (
     <div className="flex flex-row w-full">
       <form

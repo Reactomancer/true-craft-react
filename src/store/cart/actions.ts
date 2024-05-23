@@ -49,3 +49,20 @@ export const submitOrder = createAppAsyncThunk(
     return response.data;
   }
 );
+export const getUserCart = createAppAsyncThunk("cart/getUserCart", async () => {
+  const token = localStorage.getItem("handMade-token");
+  if (!token) {
+    throw new Error("Token Not Found");
+  }
+
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  const response = await axios.get(
+    `http://${process.env.REACT_APP_API_URL}/api/cart/get`,
+    config
+  );
+  return response.data;
+});
