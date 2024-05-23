@@ -28,5 +28,9 @@ export interface UserData {
   phone?: string;
   role?: string;
   id?: number;
+  shoppingSession?: {
+    id: number;
+    total: number;
+  };
   favorites: Favorite[];
 }

@@ -1,18 +1,26 @@
 import { TypedUseSelectorHook, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from ".";
 import { useSelector } from "react-redux";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  AsyncThunk,
+  AsyncThunkPayloadCreator,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const createAppAsyncThunk = <Returned, ThunkArg = void>(
-  typePrefix: string,
-  payloadCreator: (arg: ThunkArg, thunkAPI: unknown) => Promise<Returned>
-) => {
-  return createAsyncThunk(typePrefix, async (arg: ThunkArg, thunkAPI) => {
-    const response = await payloadCreator(arg, thunkAPI);
-    return response;
-  });
+type ThunkApiConfig = {
+  state: RootState;
+  dispatch: AppDispatch;
 };
+
+export const createAppAsyncThunk = <Returned, ThunkArg>(
+  type: string,
+  thunkPayloadCreator: AsyncThunkPayloadCreator<Returned, ThunkArg>
+): AsyncThunk<Returned, ThunkArg, ThunkApiConfig> =>
+  createAsyncThunk<Returned, ThunkArg, ThunkApiConfig>(
+    type,
+    thunkPayloadCreator
+  );
