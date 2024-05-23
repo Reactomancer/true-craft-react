@@ -30,6 +30,11 @@ export const loginAdmin = createAppAsyncThunk(
   }
 );
 
+export const logoutUser = createAppAsyncThunk("user/logout", () => {
+  localStorage.removeItem("handMade-token");
+  return;
+});
+
 export const registerUser = createAppAsyncThunk(
   "user/registerUser",
   async (params: RegisterFormData) => {

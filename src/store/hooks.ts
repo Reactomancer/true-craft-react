@@ -16,7 +16,7 @@ type ThunkApiConfig = {
   dispatch: AppDispatch;
 };
 
-export const createAppAsyncThunk = <Returned, ThunkArg>(
+export const createAppAsyncThunk = <Returned, ThunkArg = void>(
   type: string,
   thunkPayloadCreator: AsyncThunkPayloadCreator<Returned, ThunkArg>
 ): AsyncThunk<Returned, ThunkArg, ThunkApiConfig> =>
