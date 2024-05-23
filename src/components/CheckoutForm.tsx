@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userByIdSelector } from "../store/users/selectors";
+import { submitOrder } from "../store/cart/actions";
 
 type Inputs = { userId: number };
 
 export const CheckoutComponunt: React.FC = () => {
   const user = useAppSelector(userByIdSelector);
   const [submit, setSubmit] = useState(false);
+  const dispatch = useAppDispatch();
+
   const { handleSubmit, register } = useForm<Inputs>({
     defaultValues: { userId: user?.id },
   });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const handleSubmitOrder = (data) => {
+    dispatch(submitOrder(data));
+  };
   return (
     <div className="flex flex-row w-full">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleSubmitOrder)}
         className="flex flex-col justify-between items-center  w-lvw"
       >
         {!submit ? (

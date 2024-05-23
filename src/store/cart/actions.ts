@@ -27,3 +27,25 @@ export const deleteProductFromCart = createAppAsyncThunk(
     return response.data;
   }
 );
+
+export const getOrders = createAppAsyncThunk(
+  "cart/getProductsFromCart",
+  async (userId: number) => {
+    const response = await axios.get(
+      `http://${process.env.REACT_APP_API_URL}/api/order/getAll`,
+      { params: { userId } }
+    );
+    return response.data;
+  }
+);
+
+export const submitOrder = createAppAsyncThunk(
+  "cart/getProductsFromCart",
+  async (params: { userId: string; total: number }) => {
+    const response = await axios.post(
+      `http://${process.env.REACT_APP_API_URL}/api/order/getAll`,
+      params
+    );
+    return response.data;
+  }
+);

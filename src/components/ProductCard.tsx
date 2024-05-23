@@ -8,6 +8,7 @@ import {
 } from "../store/products/selectors";
 import { userByIdSelector } from "../store/users/selectors";
 import { addFav } from "../store/users/actions";
+import { addToCart } from "../store/cart/actions";
 
 interface Props {
   product: Product;
@@ -19,6 +20,12 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const rate = useAppSelector(conversionSelector);
   const currency = useAppSelector(currencySelector);
   const user = useAppSelector(userByIdSelector);
+
+  const handleAddToCart = () => {
+    if (product.id) {
+      dispatch(addToCart({ productId: product.id }));
+    }
+  };
 
   const handleAddFav = () => {
     if (user?.id && product.id) {
@@ -110,7 +117,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
               </div>
             )}
           </div>
-          <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <button
+            onClick={handleAddToCart}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
             Add to Cart
           </button>
           <button
