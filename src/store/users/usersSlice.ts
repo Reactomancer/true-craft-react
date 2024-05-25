@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addFav, getUserData, loginUser } from "./actions";
+import { addFav, deleteFav, getUserData, loginUser } from "./actions";
 import { UserData } from "./types";
 
 export interface UsersState {
@@ -39,10 +39,15 @@ export const usersSlice = createSlice({
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+      })
+      .addCase(deleteFav.fulfilled, (draft, { payload }) => {
+        if (draft.user) {
+          draft.user.favorites = draft.user?.favorites.filter(
+            (favorite) => favorite.id !== payload.favoriteId
+          );
+        }
       });
   },
 });
-
-export const {} = usersSlice.actions;
 
 export default usersSlice.reducer;

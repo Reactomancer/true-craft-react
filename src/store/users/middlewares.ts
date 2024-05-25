@@ -5,8 +5,15 @@ import { loginUser, registerUser } from "./actions";
 import { routes } from "../../routes";
 
 startAppListening({
-  matcher: isAnyOf(loginUser.fulfilled, registerUser.fulfilled),
+  matcher: isAnyOf(loginUser.fulfilled),
   effect: () => {
     routes.navigate("/");
+  },
+});
+
+startAppListening({
+  matcher: isAnyOf(registerUser.fulfilled),
+  effect: () => {
+    routes.navigate("/login");
   },
 });

@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
 import { Product } from "../types";
 import { userByIdSelector } from "../users/selectors";
+import { CartItem } from "./types";
 
 export const addToCart = createAppAsyncThunk(
   "cart/addToCart",
@@ -60,7 +61,8 @@ export const getUserCart = createAppAsyncThunk("cart/getUserCart", async () => {
       Authorization: token,
     },
   };
-  const response = await axios.get(
+
+  const response = await axios.get<CartItem[]>(
     `http://${process.env.REACT_APP_API_URL}/api/cart/get`,
     config
   );

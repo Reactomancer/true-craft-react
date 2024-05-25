@@ -5,20 +5,35 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userByIdSelector } from "../store/users/selectors";
 import { submitOrder } from "../store/cart/actions";
 import { getUserCart } from "../store/cart/actions";
-
-type Inputs = { userId: number };
+import {
+  userCartDiscountPercentageSelector,
+  userCartSelector,
+  userCartTotalSelector,
+} from "../store/cart/selectors";
+import { CartUserInfo } from "../store/cart/types";
+import { cartSlice } from "../store/cart/cartSlice";
 
 export const CheckoutComponunt: React.FC = () => {
   const user = useAppSelector(userByIdSelector);
+  const cart = useAppSelector(userCartSelector);
+  const total = useAppSelector(userCartTotalSelector);
+  const discount = useAppSelector(userCartDiscountPercentageSelector);
   const [submit, setSubmit] = useState(false);
   const dispatch = useAppDispatch();
 
-  const { handleSubmit, register } = useForm<Inputs>({
+  const { handleSubmit, register, watch } = useForm<CartUserInfo>({
     defaultValues: { userId: user?.id },
   });
-  const handleSubmitOrder = (data) => {
-    dispatch(submitOrder(data));
+
+  const handleAddUserInfo = () => {
+    dispatch(cartSlice.actions.addUserInfo(watch()));
   };
+
+  const handleSubmitOrder = (data: CartUserInfo) => {
+    dispatch(submitOrder({ total: total ?? 0, userId: Number(data.userId) }));
+  };
+
+  const shipping = ((total ?? 1) / (cart?.length ?? 1)).toFixed(2);
 
   useEffect(() => {
     dispatch(getUserCart());
@@ -35,31 +50,59 @@ export const CheckoutComponunt: React.FC = () => {
             <div className="flex flex-row flex-wrap gap-5 p-6 justify-center items-center pad">
               <div className="flex flex-col gap-2 flex-wrap">
                 <label>First name</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("firstName")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label>Last name</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("lastName")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label>Email</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("email")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label>Country</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("country")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label>City</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("city")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label>Zip Code</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("zipCode")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label> Address</label>
-                <TextField required sx={{ height: "70px", width: "500px" }} />
+                <TextField
+                  {...register("address")}
+                  required
+                  sx={{ height: "70px", width: "500px" }}
+                />
               </div>
               <input {...register("userId")} hidden />
             </div>
@@ -68,7 +111,10 @@ export const CheckoutComponunt: React.FC = () => {
               <Button
                 variant="contained"
                 type="button"
-                onClick={() => setSubmit(true)}
+                onClick={() => {
+                  setSubmit(true);
+                  handleAddUserInfo();
+                }}
                 sx={{
                   height: "56px",
                   background: "#FDF2E9",
@@ -97,7 +143,6 @@ export const CheckoutComponunt: React.FC = () => {
                   <label>CVV</label>
                   <TextField required type="number" />
                 </div>
-                <input {...register("userId")} hidden />
               </div>
             </div>
 
@@ -125,31 +170,25 @@ export const CheckoutComponunt: React.FC = () => {
           Shopping Cart
         </p>
         <ul className="w-full">
-          <li className="border-b-black border px-5 py-3  flex flex-row justify-between">
-            <span>dsadsad</span>
-            <span>300 EGP</span>
-          </li>
-          <li className="border-b-black border px-5 py-3 flex flex-row justify-between">
-            <span>dsadsad</span>
-            <span>300 EGP</span>
-          </li>
-          <li className="border-b-black border px-5 py-3 flex flex-row justify-between">
-            <span>dsadsad</span>
-            <span>300 EGP</span>
-          </li>
+          {cart?.map(({ product }) => (
+            <li className="border-b-black border px-5 py-3  flex flex-row justify-between">
+              <span>{product.productName}</span>
+              <span>{product.currentPrice} EGP</span>
+            </li>
+          ))}
         </ul>
         <div className="bg-[#FDF2E9] flex flex-col justify-center items-center  my-20 gap-4 w-[70%]">
           <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
-            <span>Shipping : </span>
-            <span>{Math.floor(Math.random() * (300 - 100 + 1)) + 100} EGP</span>
+            <span>Shipping: </span>
+            <span>{shipping} EGP</span>
           </div>
           <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
-            <span>Discount : </span>
-            <span>xx</span>
+            <span>Discount: </span>
+            <span>{discount}%</span>
           </div>
           <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
-            <span>Total : </span>
-            <span>xx</span>
+            <span>Total: </span>
+            <span>{total ?? 1 + Number(shipping)} EGP</span>
           </div>
         </div>
       </div>

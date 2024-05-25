@@ -18,7 +18,11 @@ type ThunkApiConfig = {
 
 export const createAppAsyncThunk = <Returned, ThunkArg = void>(
   type: string,
-  thunkPayloadCreator: AsyncThunkPayloadCreator<Returned, ThunkArg>
+  thunkPayloadCreator: AsyncThunkPayloadCreator<
+    Returned,
+    ThunkArg,
+    ThunkApiConfig
+  >
 ): AsyncThunk<Returned, ThunkArg, ThunkApiConfig> =>
   createAsyncThunk<Returned, ThunkArg, ThunkApiConfig>(
     type,

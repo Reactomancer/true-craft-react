@@ -75,3 +75,13 @@ export const addFav = createAppAsyncThunk(
     return response.data;
   }
 );
+
+export const deleteFav = createAppAsyncThunk(
+  "products/deleteFav",
+  async (id: number) => {
+    const response = await axios.delete<{ favoriteId?: number }>(
+      `http://${process.env.REACT_APP_API_URL}/api/favorites/${id}`
+    );
+    return response.data;
+  }
+);

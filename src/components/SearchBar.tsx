@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Divider, IconButton, InputBase, Popover } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Favorite, UserData } from "../store/users/types";
 import { useAppDispatch } from "../store/hooks";
-import { logoutUser } from "../store/users/actions";
+import { deleteFav, logoutUser } from "../store/users/actions";
 
 interface Props {
   user?: UserData;
@@ -27,6 +28,10 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleDeleteItem = (id: number) => {
+    dispatch(deleteFav(id));
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -43,8 +48,11 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
   }
 
   return (
-    <div className="flex justify-between items-center bg-[#FDF2E9] py-4">
-      <div className="flex flex-row w-3/4 px-5 mx-20 rounded-full items-center bg-white h-[82px]">
+    <div className="flex justify-around items-center bg-[#FDF2E9] py-4">
+      <form
+        onSubmit={() => handleSearchClick(search)}
+        className="flex flex-row w-2/4 px-5 mx-20 rounded-full items-center bg-white h-[82px]"
+      >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search"
@@ -53,19 +61,15 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
           size="medium"
         />
         <Divider sx={{ height: 50, m: 1 }} orientation="vertical" />
-        <IconButton
-          onClick={() => handleSearchClick(search)}
-          type="button"
-          sx={{ p: "10px" }}
-          aria-label="search"
-        >
+        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
           <img src="/images/search-icon.png" className="w-[44px]" />
         </IconButton>
-      </div>
-      <div className="flex flex-row w-1/4 justify-between items-center px-6 text-2xl">
+      </form>
+      <div className="flex flex-row w-1/4 justify-between items-center text-2xl">
         {user?.firstName != null ? (
-          <>
+          <div className="flex gap-3 items-center">
             <p>Welcome {user?.firstName?.toUpperCase()}</p>
+            <Divider sx={{ height: 50, m: 1 }} orientation="vertical" />
 
             <IconButton id={id} onClick={handleClick}>
               <svg
@@ -89,9 +93,12 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
                 </g>
               </svg>
             </IconButton>
+            <Divider sx={{ height: 50, m: 1 }} orientation="vertical" />
+
             <NavLink to={"/checkout"} className="text-3xl">
               🛒
             </NavLink>
+            <Divider sx={{ height: 50, m: 1 }} orientation="vertical" />
             <button onClick={handleLogout}>
               <svg
                 fill="#000000"
@@ -100,9 +107,7 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 384.971 384.971"
-                xml:space="preserve"
               >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g
@@ -116,14 +121,13 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
                       <path d="M180.455,360.91H24.061V24.061h156.394c6.641,0,12.03-5.39,12.03-12.03s-5.39-12.03-12.03-12.03H12.03 C5.39,0.001,0,5.39,0,12.031V372.94c0,6.641,5.39,12.03,12.03,12.03h168.424c6.641,0,12.03-5.39,12.03-12.03 C192.485,366.299,187.095,360.91,180.455,360.91z"></path>
                       <path d="M381.481,184.088l-83.009-84.2c-4.704-4.752-12.319-4.74-17.011,0c-4.704,4.74-4.704,12.439,0,17.179l62.558,63.46H96.279 c-6.641,0-12.03,5.438-12.03,12.151c0,6.713,5.39,12.151,12.03,12.151h247.74l-62.558,63.46c-4.704,4.752-4.704,12.439,0,17.179 c4.704,4.752,12.319,4.752,17.011,0l82.997-84.2C386.113,196.588,386.161,188.756,381.481,184.088z"></path>
                     </g>
-                    <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g>
                   </g>
                 </g>
               </svg>
             </button>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex gap-3 items-center">
             <NavLink to={"/login"}>Login</NavLink>
             <NavLink to={"/register"}>Sign up</NavLink>
             <IconButton id={id} onClick={handleClick}>
@@ -151,7 +155,7 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
             <NavLink to={"/checkout"} className="text-3xl">
               🛒
             </NavLink>
-          </>
+          </div>
         )}
       </div>
       <Popover
@@ -167,17 +171,22 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
         {user?.favorites?.length ? (
           <ul>
             {user.favorites?.map((item) => (
-              <button
-                className=" flex flex-row gap-3 p-4 items-center"
-                onClick={() => handleNavigate(item)}
-              >
-                <img
-                  src={item.product.previewImageLink}
-                  width={100}
-                  height={100}
-                />
-                <p>{item.product.productName}</p>
-              </button>
+              <div className="flex gap-2 items-center" key={item.productId}>
+                <button
+                  className="flex flex-row gap-3 p-4 items-center"
+                  onClick={() => handleNavigate(item)}
+                >
+                  <img
+                    src={item.product.previewImageLink}
+                    width={100}
+                    height={100}
+                  />
+                  <p>{item.product.productName}</p>
+                </button>
+                <button onClick={() => handleDeleteItem(item.id)}>
+                  <CloseIcon />
+                </button>
+              </div>
             ))}
           </ul>
         ) : (
