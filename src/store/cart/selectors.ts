@@ -13,6 +13,8 @@ export const userCartTotalSelector = createSelector(
   }
 );
 
+export const cartUserInfoSelector = (state: RootState) => state.cart.userInfo;
+
 export const userCartDiscountPercentageSelector = createSelector(
   userCartSelector,
   userCartTotalSelector,
@@ -24,8 +26,8 @@ export const userCartDiscountPercentageSelector = createSelector(
     );
 
     const totalCartValue = total || 0;
-    const discountPercentage = totalDiscount ?? 1 / totalCartValue;
+    const discountPercentage = (totalDiscount ?? 1) / totalCartValue;
 
-    return discountPercentage;
+    return discountPercentage.toFixed(2);
   }
 );

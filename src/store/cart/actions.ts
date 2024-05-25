@@ -2,7 +2,8 @@ import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
 import { Product } from "../types";
 import { userByIdSelector } from "../users/selectors";
-import { CartItem } from "./types";
+import { CartItem, CartUserInfo } from "./types";
+import { userCartTotalSelector } from "./selectors";
 
 export const addToCart = createAppAsyncThunk(
   "cart/addToCart",
@@ -33,8 +34,7 @@ export const getOrders = createAppAsyncThunk(
   "cart/getProductsFromCart",
   async (userId: number) => {
     const response = await axios.get(
-      `http://${process.env.REACT_APP_API_URL}/api/order/getAll`,
-      { params: { userId } }
+      `http://${process.env.REACT_APP_API_URL}/api/order/getAll/${userId}`
     );
     return response.data;
   }
@@ -42,14 +42,18 @@ export const getOrders = createAppAsyncThunk(
 
 export const submitOrder = createAppAsyncThunk(
   "order/submitOrder",
-  async (params: { userId: number; total: number }) => {
+  async (params: CartUserInfo, { getState }) => {
+    const user = userByIdSelector(getState());
+    const total = userCartTotalSelector(getState());
+
     const response = await axios.post(
       `http://${process.env.REACT_APP_API_URL}/api/order/create`,
-      params
+      { ...params, userId: user?.id, total }
     );
     return response.data;
   }
 );
+
 export const getUserCart = createAppAsyncThunk("cart/getUserCart", async () => {
   const token = localStorage.getItem("handMade-token");
   if (!token) {

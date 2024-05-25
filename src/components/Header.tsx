@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -8,6 +7,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useGoogleTranslate } from "../utils/use-google-translate";
 import { useAppDispatch } from "../store/hooks";
 import { convertCurrency } from "../store/products/action";
+import Box from "@mui/material/Box";
 
 const Header: React.FC = () => {
   const [currency, setCurrency] = useState("EGP");
