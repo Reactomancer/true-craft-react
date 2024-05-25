@@ -171,13 +171,15 @@ export const CheckoutComponunt: React.FC = () => {
         </p>
         <ul className="w-full">
           {cart?.map(({ product }) => (
-            <li className="border-b-black border px-5 py-3  flex flex-row justify-between">
+            <li className="border-b-black border px-4 py-3 flex flex-row justify-between">
               <span>{product.productName}</span>
-              <span>{product.currentPrice} EGP</span>
+              <span className="whitespace-nowrap">
+                {product.currentPrice} EGP
+              </span>
             </li>
           ))}
         </ul>
-        <div className="bg-[#FDF2E9] flex flex-col justify-center items-center  my-20 gap-4 w-[70%]">
+        <div className="bg-[#FDF2E9] flex flex-col justify-center items-center my-20 gap-4 w-[70%]">
           <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
             <span>Shipping: </span>
             <span>{shipping} EGP</span>

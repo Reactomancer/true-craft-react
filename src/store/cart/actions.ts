@@ -42,7 +42,7 @@ export const getOrders = createAppAsyncThunk(
 
 export const submitOrder = createAppAsyncThunk(
   "order/submitOrder",
-  async (params: { userId: string; total: number }) => {
+  async (params: { userId: number; total: number }) => {
     const response = await axios.post(
       `http://${process.env.REACT_APP_API_URL}/api/order/create`,
       params
