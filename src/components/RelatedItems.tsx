@@ -1,7 +1,12 @@
 import { FC } from "react";
 import { ProductCard } from "./ProductCard";
+import { Product } from "../store/types";
 
-export const RelatedItems: FC = ({ product }) => {
+interface Prop {
+  product: Product;
+}
+
+export const RelatedItems: FC<Prop> = ({ product }) => {
   return (
     <div className="border-t-2">
       <h1 className="text-[#B47C4E] font-bold text-center text-2xl mt-10">

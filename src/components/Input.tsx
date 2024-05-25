@@ -9,7 +9,6 @@ export const InputText: React.FC<Props> = ({ label, ...props }) => {
     <div className="flex flex-col gap-2">
       <label>{label}</label>
       <TextField {...props} sx={{ height: "70px" }} />
-      {console.log(props)}
     </div>
   );
 };

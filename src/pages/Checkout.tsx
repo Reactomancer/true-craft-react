@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CheckoutContainer } from "../containers/CheckoutContainer";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { userByIdSelector } from "../store/users/selectors";
 
 const Checkout: React.FC = () => {
   // const dispatch = useAppDispatch();
