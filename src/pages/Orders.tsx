@@ -14,5 +14,15 @@ export const Orders: FC = () => {
     }
   }, [dispatch, user]);
 
-  return <OrdersList user={user} />;
+  return (
+    <div>
+      {user ? (
+        <OrdersList user={user} />
+      ) : (
+        <p className="text-2xl text-center font-bold">
+          You are not authoriszed
+        </p>
+      )}
+    </div>
+  );
 };
