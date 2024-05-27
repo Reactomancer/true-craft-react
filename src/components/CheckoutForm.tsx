@@ -1,13 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, TextField, Autocomplete } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userByIdSelector } from "../store/users/selectors";
 import { submitOrder } from "../store/cart/actions";
-import { getUserCart } from "../store/cart/actions";
 import {
   userCartDiscountPercentageSelector,
   userCartSelector,
@@ -79,10 +78,6 @@ export const CheckoutComponent: React.FC = () => {
   };
 
   const shipping = ((total ?? 1) / (cart?.length ?? 1)).toFixed(2);
-
-  useEffect(() => {
-    dispatch(getUserCart());
-  }, [dispatch, user?.id]);
 
   return (
     <div className="flex flex-row w-full">
@@ -265,10 +260,12 @@ export const CheckoutComponent: React.FC = () => {
             <span>Shipping: </span>
             <span>{shipping} EGP</span>
           </div>
-          <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
-            <span>Discount: </span>
-            <span>{discount}%</span>
-          </div>
+          {discount && (
+            <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
+              <span>Discount: </span>
+              <span>{discount}%</span>
+            </div>
+          )}
           <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
             <span>Total: </span>
             <span>{total ?? 1 + Number(shipping)} EGP</span>

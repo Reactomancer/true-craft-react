@@ -17,7 +17,20 @@ export interface CartUserInfo {
   userId: number;
 }
 
+export interface Order {
+  id: number;
+  userId: number;
+  total: number;
+  address: string;
+  zipCode: null;
+  city: null;
+  country: null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface CartInitialState {
   cart?: CartItem[];
   userInfo?: CartUserInfo;
+  orderItems?: { orders: Order[] };
 }

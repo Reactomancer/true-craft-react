@@ -15,6 +15,8 @@ export const userCartTotalSelector = createSelector(
 
 export const cartUserInfoSelector = (state: RootState) => state.cart.userInfo;
 
+export const OrdersListSelector = (state: RootState) => state.cart.orderItems;
+
 export const userCartDiscountPercentageSelector = createSelector(
   userCartSelector,
   userCartTotalSelector,
