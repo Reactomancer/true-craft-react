@@ -19,7 +19,6 @@ export const Feedback: FC = () => {
         do. Will use again.
       </p>
       <div className="flex justify-end items-center gap-3">
-        <span>Was this helpful?</span>
         <img
           className="w-[34px] h-[34px]"
           src="https://www.svgrepo.com/show/243653/like.svg"

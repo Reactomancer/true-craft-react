@@ -14,6 +14,10 @@ import {
 } from "../store/cart/selectors";
 import { CartUserInfo } from "../store/cart/types";
 import { cartSlice } from "../store/cart/cartSlice";
+import {
+  conversionSelector,
+  currencySelector,
+} from "../store/products/selectors";
 
 const cityOptions = {
   Russia: [
@@ -62,6 +66,9 @@ export const CheckoutComponent: React.FC = () => {
   const total = useAppSelector(userCartTotalSelector);
   const discount = useAppSelector(userCartDiscountPercentageSelector);
   const [submit, setSubmit] = useState(false);
+  const rate = useAppSelector(conversionSelector);
+  const currency = useAppSelector(currencySelector);
+
   const dispatch = useAppDispatch();
 
   const { handleSubmit, register, watch, control, resetField } =
@@ -246,14 +253,18 @@ export const CheckoutComponent: React.FC = () => {
           Shopping Cart
         </p>
         <ul className="w-full">
-          {cart?.map(({ product }) => (
-            <li className="border-b-black border px-4 py-3 flex flex-row justify-between">
-              <span>{product.productName}</span>
-              <span className="whitespace-nowrap">
-                {product.currentPrice} EGP
-              </span>
-            </li>
-          ))}
+          {cart?.map(({ product }) => {
+            const convertedPrice = `${(
+              (rate ?? 1) * product.currentPrice
+            ).toFixed(2)} ${currency ?? "EGP"}`;
+
+            return (
+              <li className="border-b-black border px-4 py-3 flex flex-row justify-between">
+                <span>{product.productName}</span>
+                <span className="whitespace-nowrap">{convertedPrice}</span>
+              </li>
+            );
+          })}
         </ul>
         <div className="bg-[#FDF2E9] flex flex-col justify-center items-center my-20 gap-4 w-[70%]">
           <div className="border-b-2 px-10 w-full py-5 border-[#000000]">

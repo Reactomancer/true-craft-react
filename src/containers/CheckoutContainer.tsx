@@ -15,7 +15,6 @@ export const CheckoutContainer: React.FC = () => {
   const user = useAppSelector(userByIdSelector);
   const cart = useAppSelector(userCartSelector);
 
-  console.log(cart);
   return (
     <div>
       {user ? (
