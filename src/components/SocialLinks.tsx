@@ -6,30 +6,30 @@ import React from "react";
 const SocialLinks: React.FC = () => {
   return (
     <>
-      <div className="flex flex-row items-center justify-center py-20 ">
-        <h2 className="w-1/4 text-2xl">Follow us:</h2>
-        <div className="flex flex-row gap-20">
+      <div className="flex flex-row items-center justify-center gap-4 ">
+        <h2 className="w-1/4 text-sm whitespace-nowrap">Follow us:</h2>
+        <div className="flex flex-row gap-5">
           <a href="https://www.instagram.com/">
             <InstagramIcon
-              style={{ width: "150px", height: "150px", color: "white" }}
-              className="bg-black rounded-full p-3"
+              style={{ width: "25", height: "25", color: "white" }}
+              className="bg-black rounded-full p-1"
             />
           </a>
           <a href="https://www.facebook.com/">
             <FacebookIcon
-              style={{ width: "150px", height: "150px", color: "white" }}
-              className="bg-black rounded-full p-3"
+              style={{ width: "25", height: "25", color: "white" }}
+              className="bg-black rounded-full p-1"
             />
           </a>
           <a href="https://www.twitter.com/">
             <TwitterIcon
-              style={{ width: "150px", height: "150px", color: "white" }}
-              className="bg-black rounded-full p-3"
+              style={{ width: "25", height: "25", color: "white" }}
+              className="bg-black rounded-full p-1"
             />
           </a>
           <a href="https://www.vk.com/">
-            <figure className="bg-black rounded-full p-3 w-[150px] h-[150px]">
-              <img src="images/vk.svg" />
+            <figure className="bg-black rounded-full p-1 w-[25px] h-[25px] object-contain">
+              <img width={25} height={25} src="images/vk.svg" />
             </figure>
           </a>
         </div>

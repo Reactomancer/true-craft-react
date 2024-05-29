@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SocialLinks from "./SocialLinks";
 
 const Footer: React.FC = () => {
   const footerItems = [
@@ -27,6 +28,14 @@ const Footer: React.FC = () => {
         { title: "Contact us", link: "/" },
         { title: "Shipping Info", link: "/" },
         { title: "Return Policy", link: "/" },
+      ],
+    },
+    {
+      title: "Contact us",
+      items: [
+        { title: "TrueCraft@mail.ru", link: "mailto:TrueCraft@mail.ru" },
+        { title: "+79880717089", link: "tel:+79880717089" },
+        { title: "+201278324417", link: "tel:+201278324417" },
       ],
     },
     {
@@ -69,6 +78,7 @@ const Footer: React.FC = () => {
           </div>
         ))}
       </div>
+      <SocialLinks />
     </div>
   );
 };

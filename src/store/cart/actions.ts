@@ -21,10 +21,10 @@ export const addToCart = createAppAsyncThunk(
 
 export const deleteProductFromCart = createAppAsyncThunk(
   "cart/deleteProductFromCart",
-  async (productId: number) => {
+  async (params: { sessionId: number; productId: number }) => {
     const response = await axios.delete<number>(
       `http://${process.env.REACT_APP_API_URL}/api/cart/remove`,
-      { params: { productId } }
+      { params }
     );
     return response.data;
   }

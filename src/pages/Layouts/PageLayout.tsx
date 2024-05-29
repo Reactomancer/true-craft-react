@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 import SearchBar from "../../components/SearchBar";
 import { userByIdSelector } from "../../store/users/selectors";
 import Footer from "../../components/Footer";
-import SocialLinks from "../../components/SocialLinks";
 import { routes } from "../../routes";
 
 const PageLayout: React.FC = () => {
@@ -27,7 +26,6 @@ const PageLayout: React.FC = () => {
       <Header />
       <SearchBar onSearch={handleClickSearch} user={user} />
       <Outlet />
-      <SocialLinks />
       <Footer />
     </>
   );

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getOrders, getUserCart } from "./actions";
+import { deleteProductFromCart, getOrders, getUserCart } from "./actions";
 import { CartInitialState, CartUserInfo } from "./types";
 
 const initialState: CartInitialState = {};
@@ -19,6 +19,12 @@ export const cartSlice = createSlice({
 
     addCase(getOrders.fulfilled, (draft, { payload }) => {
       draft.orderItems = payload;
+    });
+
+    addCase(deleteProductFromCart.fulfilled, (draft, { payload }) => {
+      draft.cart = draft.cart?.filter(
+        (product) => product.product.id !== payload
+      );
     });
   },
 });
