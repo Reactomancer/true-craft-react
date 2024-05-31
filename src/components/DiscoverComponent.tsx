@@ -12,7 +12,7 @@ const DiscoverComponent: React.FC = () => {
       <div className="flex flex-col justify-center mx-28 py-12 px-20">
         <h1 className="font-[500] text-7xl text-center leading-[116.18px] mb-9">
           {/* {title} */}
-          <h1 className={``} >Discover Exquisite <small className={`text-[22px] text-blue`}>Handmade Craftsmanship</small></h1>
+          <h1 className={`text-[44px]`} >Discover Exquisite Handmade Craftsmanship</h1>
         </h1>
         <div className="flex flex-center gap-5 items-start  ">
           <div className="flex flex-col items-start justify-between h-[50vh] gap-8">

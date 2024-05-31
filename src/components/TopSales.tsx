@@ -12,7 +12,7 @@ const TopSales: React.FC = () => {
   return (
     <>
       <div className="bg-[#FDF2E9] py-5">
-        <h1 className="font-bold text-7xl text-center">TOP SALES</h1>
+        <h1 className="font-bold text-7xl text-center"> Top Sales</h1>
         <div className="flex flex-row justify-between items-center pb-5 mx-auto px-6 gap-2 flex-wrap">
           {data.map((item) => {
             return (
