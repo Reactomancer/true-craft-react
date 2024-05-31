@@ -60,7 +60,7 @@ const Header: React.FC = () => {
             display: "flex",
             flexDirection: "row",
             gap: "20px",
-            marginTop:'50px',
+            marginTop:'15px',
             zIndex:20000000000000000000000000000000000
             
           }}

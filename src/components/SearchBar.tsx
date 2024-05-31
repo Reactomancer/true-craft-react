@@ -129,6 +129,7 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
         ) : (
           <div className="flex gap-3 items-center">
             <NavLink to={"/login"}>Login</NavLink>
+            <p>/</p>
             <NavLink to={"/register"}>Sign up</NavLink>
             <IconButton id={id} onClick={handleClick}>
               <svg
