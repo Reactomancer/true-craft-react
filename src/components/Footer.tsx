@@ -38,14 +38,6 @@ const Footer: React.FC = () => {
         { title: "+201278324417", link: "tel:+201278324417" },
       ],
     },
-    {
-      title: "Contact us",
-      items: [
-        { title: "TrueCraft@mail.ru", link: "mailto:TrueCraft@mail.ru" },
-        { title: "+79880717089", link: "tel:+79880717089" },
-        { title: "+201278324417", link: "tel:+201278324417" },
-      ],
-    },
   ];
 
   return (

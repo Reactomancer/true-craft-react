@@ -60,7 +60,7 @@ const SearchBar: React.FC<Props> = ({ user, onSearch: handleSearchClick }) => {
           value={search}
           size="medium"
         />
-        <Divider sx={{ height: 50, m: 1 }} orientation="vertical" />
+        <Divider sx={{ height: 20, m: 1 }} orientation="vertical" />
         <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
           <img src="/images/search-icon.png" className="w-[44px]" />
         </IconButton>

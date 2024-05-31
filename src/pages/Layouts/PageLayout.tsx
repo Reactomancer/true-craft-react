@@ -24,6 +24,7 @@ const PageLayout: React.FC = () => {
   return (
     <>
       <Header />
+      <div className="pt-24"></div>
       <SearchBar onSearch={handleClickSearch} user={user} />
       <Outlet />
       <Footer />

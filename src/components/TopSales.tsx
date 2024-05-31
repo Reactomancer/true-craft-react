@@ -6,17 +6,8 @@ const TopSales: React.FC = () => {
     { title: "Beads", image: "/images/beads.png", link: "1" },
     { title: "Pharaonic papyrus", image: "/images/pharoh.jpeg", link: "2" },
     { title: "Ceramic", image: "/images/ceramic.jpeg", link: "3" },
-    {
-      title: "Ornaments",
-      image:
-        "https://i.ibb.co/f2jv85f/Egyptian-Eye-Of-Horus-Ornament-On-Papyrus-Throw-Pillow-by-Nartissima.jpg",
-      link: "4",
-    },
-    {
-      title: "Braclets",
-      image: "https://i.ibb.co/4MnySds/51-ZKp-N9b1-L-AC-SX679.jpg",
-      link: "5",
-    },
+    { title: "Ceramic", image: "/images/ceramic.jpeg", link: "3" },
+    { title: "Ceramic", image: "/images/ceramic.jpeg", link: "3" },
   ];
   return (
     <>

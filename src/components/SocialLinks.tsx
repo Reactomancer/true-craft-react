@@ -8,7 +8,7 @@ const SocialLinks: React.FC = () => {
     <>
       <div className="flex flex-row items-center justify-center gap-4 ">
         <h2 className="w-1/4 text-sm whitespace-nowrap">Follow us:</h2>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 w-full">
           <a href="https://www.instagram.com/">
             <InstagramIcon
               style={{ width: "25", height: "25", color: "white" }}
