@@ -110,7 +110,7 @@ export const ProductInfo: React.FC<Props> = ({ product }) => {
                     )
                   )}
                 </div>
-                <span className=" text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ms-3">
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ms-3">
                   {product.rating}
                 </span>
               </div>

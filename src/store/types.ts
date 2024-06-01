@@ -95,3 +95,12 @@ export interface FavResponse {
   id: number;
   product: Product;
 }
+
+export interface AddReviewParams {
+  rating: number;
+  userId: number;
+  productId: number;
+  isVerified: boolean;
+  userName: string;
+  reviewText: string;
+}

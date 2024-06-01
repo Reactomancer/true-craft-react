@@ -1,0 +1,78 @@
+.notifications_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 50;
+  list-style: none;
+}
+
+.notification {
+  display: flex;
+  gap: 10px;
+  width: 320px;
+  position: relative;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: rgba(31, 26, 26, 0.2) 0px 0px 1rem;
+
+  &__icon {
+    width: 35px;
+    height: 35px;
+
+    &__success {
+      fill: green !important;
+    }
+
+    &__error {
+      fill: red !important;
+    }
+  }
+
+  &__close_icon {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 20px !important;
+    height: 20px !important;
+    fill: gray !important;
+    cursor: pointer;
+  }
+
+  &__text {
+    font-size: 16px;
+  }
+
+  &__progress_bar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 5px;
+    margin: 0 -15px;
+    border-radius: 12px;
+    transform-origin: left;
+    animation: progress-bar linear 1 forwards;
+
+    &__error {
+      background-color: red;
+    }
+
+    &__success {
+      background-color: green;
+    }
+  }
+}
+
+@keyframes progress-bar {
+  0% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0);
+  }
+}

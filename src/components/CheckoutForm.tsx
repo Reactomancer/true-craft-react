@@ -63,9 +63,18 @@ const cityOptions = {
 const countryOptions = ["Russia", "Egypt", "USA"];
 
 const deliveryOptions = {
-  Russia: ["Почта России", "СДЭК", "Деловые Линии", "Дикси", "Ботан"],
-  Egypt: ["Nahdi", "Speedex", "Fedex", "Aramex", "DHL"],
-  Usa: ["UPS", "Fedex", "USPS", "DHL", "Amazon Logistics"],
+  Russia: [
+    "Почта России (6 дней, +100 руб.)",
+    "СДЭК (4 дня, +150 руб.)",
+    "Деловые Линии (14 дней, +50 руб.)",
+  ],
+  Egypt: [
+    "Nahdi (4 days, +20 EGP)",
+    "Speedex (6 days, +13.5 EGP)",
+    "Fedex (8 days, +10 EGP)",
+    "Aramex (14 days, +2.5 EGP)",
+  ],
+  Usa: ["UPS", "Fedex", "USPS", "DHL"],
 };
 
 export const CheckoutComponent: React.FC = () => {
@@ -161,15 +170,6 @@ export const CheckoutComponent: React.FC = () => {
           }}
         >
           Payment
-        </p>
-        <p
-          style={{
-            fontSize: 24,
-            fontWeight: 700,
-            borderBottom: `2px solid black`,
-          }}
-        >
-          Confirmation
         </p>
       </div>
       <div className="flex flex-row w-full">

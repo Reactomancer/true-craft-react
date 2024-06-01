@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAppAsyncThunk } from "../hooks";
 import {
+  AddReviewParams,
   CurrencyParams,
   CurrencyResponse,
   Product,
@@ -96,6 +97,18 @@ export const convertCurrency = createAppAsyncThunk(
     const response = await axios.get<CurrencyResponse>(
       `https://v6.exchangerate-api.com/v6/7da99ad515d440eb48800b3b/pair/${params.from}/${params.to}`
     );
+    return response.data;
+  }
+);
+
+export const addReview = createAppAsyncThunk(
+  "products/addReview",
+  async (params: AddReviewParams) => {
+    const response = await axios.post(
+      `http://${process.env.REACT_APP_API_URL}/api/reviews/add`,
+      params
+    );
+
     return response.data;
   }
 );

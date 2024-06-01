@@ -19,9 +19,7 @@ export const Orders: FC = () => {
       {user ? (
         <OrdersList user={user} />
       ) : (
-        <p className="text-2xl text-center font-bold">
-          You are not authoriszed
-        </p>
+        <p className="text-2xl text-center font-bold">You are not authorized</p>
       )}
     </div>
   );

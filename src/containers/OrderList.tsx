@@ -36,6 +36,9 @@ export const OrdersList: FC<Props> = ({ user }) => {
                       Name
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Order ID
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Total
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -66,6 +69,10 @@ export const OrdersList: FC<Props> = ({ user }) => {
                       (rate ?? 1) * order.total
                     ).toFixed(2)} ${currency ?? "EGP"}`;
 
+                    const randomNumber = Math.floor(
+                      1000 + Math.random() * 9000
+                    );
+
                     return (
                       <tbody key={order.id}>
                         <tr>
@@ -74,6 +81,15 @@ export const OrdersList: FC<Props> = ({ user }) => {
                               <div className="ml-3">
                                 <p className="text-gray-900 whitespace-no-wrap">
                                   {user?.firstName} {user?.lastName}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <div className="flex items-center">
+                              <div className="ml-3">
+                                <p className="text-gray-900 whitespace-no-wrap">
+                                  {randomNumber}
                                 </p>
                               </div>
                             </div>

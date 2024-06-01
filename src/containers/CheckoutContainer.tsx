@@ -20,9 +20,7 @@ export const CheckoutContainer: React.FC = () => {
       {user ? (
         cart && <CheckoutComponent />
       ) : (
-        <p className="text-2xl text-center font-bold">
-          You are not authoriszed
-        </p>
+        <p className="text-2xl text-center font-bold">You are not authorized</p>
       )}
     </div>
   );

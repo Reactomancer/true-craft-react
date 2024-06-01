@@ -14,6 +14,7 @@ import { AddCatPage } from "./pages/admin/AddCatPage";
 import SearchPage from "./pages/SearchPage";
 import BestSalesPage from "./pages/BestSalesPage";
 import { Orders } from "./pages/Orders";
+import { OrderSuccessfulPage } from "./pages/OrderSuccessfullPage";
 
 export const routes = createBrowserRouter([
   {
@@ -42,7 +43,11 @@ export const routes = createBrowserRouter([
       { path: "checkout", element: <Checkout /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
-      { path: "orders", element: <Orders /> },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
+      { path: "successfull", element: <OrderSuccessfulPage /> },
     ],
   },
   {

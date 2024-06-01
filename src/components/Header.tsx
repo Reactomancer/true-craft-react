@@ -30,66 +30,67 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header style={{zIndex:200000000000000}} className=" fixed top-0 h-[10vh] w-full bg-white flex flex-row p-5 justify-between items-center">
-        <div style={{zIndex:2000000000000000000000000000000000000000}} className="flex justify-between items-center w-full">
-        <Link className="w-1/4" to={"/"}>
-          <img
-            src="./images/logo.png"
-            alt="TrueCraft Logo"
-            className="h-20 w-[30vh] "
-          />
-        </Link>
+      <header
+        style={{ zIndex: 10 }}
+        className=" fixed top-0 h-[10vh] w-full bg-white flex flex-row p-5 justify-between items-center"
+      >
+        <div className="flex justify-between items-center w-full">
+          <Link className="w-1/4" to={"/"}>
+            <img
+              src="./images/logo.png"
+              alt="TrueCraft Logo"
+              className="h-20 w-[30vh] "
+            />
+          </Link>
 
-        <nav>
-          <ul className="flex flex-row gap-16 text-2xl">
-            {navigationLinks.map((link) => {
-              return (
-                <li key={link.name}>
-                  <NavLink className="hover:text-blue-700 hover:border-b-[1px] border-b-blue-700 py-2" to={link.link}>
-                    {link.name}
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-        
-        <Box
-          sx={{
-            minWidth: 120,
-            display: "flex",
-            flexDirection: "row",
-            gap: "20px",
-            marginTop:'15px',
-            zIndex:20000000000000000000000000000000000
-            
-          }}
-        >
+          <nav>
+            <ul className="flex flex-row gap-16 text-2xl">
+              {navigationLinks.map((link) => {
+                return (
+                  <li key={link.name}>
+                    <NavLink
+                      className="hover:text-blue-700 hover:border-b-[1px] border-b-blue-700 py-2"
+                      to={link.link}
+                    >
+                      {link.name}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-
-          <div 
-            className=" flex justify-end p-5 [&_div:first-child+span]:hidden "
-            id="google_translate_element"
-          />
-          {/* <div style={{zIndex:2000000000000000000000000000000000000000000000000000000000000000}}> */}
-          <FormControl fullWidth >
-            <InputLabel id="demo-simple-select-label">Currency:</InputLabel>
-            <Select 
-              
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={currency}
-              label="Currency:"
-              onChange={handleChange}
-            >
-              <MenuItem  value={"EGP"}>EGP</MenuItem>
-              <MenuItem  value={"USD"}>USD</MenuItem>
-              <MenuItem  value={"RUB"}>RUB</MenuItem>
-            </Select>
-          </FormControl>
-          {/* </div> */}
-
-        </Box>
+          <Box
+            sx={{
+              minWidth: 120,
+              display: "flex",
+              flexDirection: "row",
+              gap: "20px",
+              marginTop: "15px",
+              zIndex: 20000000000000000000000000000000000,
+            }}
+          >
+            <div
+              className=" flex justify-end p-5 [&_div:first-child+span]:hidden "
+              id="google_translate_element"
+            />
+            {/* <div style={{zIndex:2000000000000000000000000000000000000000000000000000000000000000}}> */}
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Currency:</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={currency}
+                label="Currency:"
+                onChange={handleChange}
+              >
+                <MenuItem value={"EGP"}>EGP</MenuItem>
+                <MenuItem value={"USD"}>USD</MenuItem>
+                <MenuItem value={"RUB"}>RUB</MenuItem>
+              </Select>
+            </FormControl>
+            {/* </div> */}
+          </Box>
         </div>
       </header>
     </>
