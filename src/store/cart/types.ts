@@ -15,6 +15,7 @@ export interface CartUserInfo {
   zipCode: number;
   address: string;
   userId: number;
+  total: number;
 }
 
 export interface Order {

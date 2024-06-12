@@ -3,7 +3,6 @@ import { createAppAsyncThunk } from "../hooks";
 import { Product } from "../types";
 import { userByIdSelector } from "../users/selectors";
 import { CartItem, CartUserInfo } from "./types";
-import { userCartTotalSelector } from "./selectors";
 
 export const addToCart = createAppAsyncThunk(
   "cart/addToCart",
@@ -44,11 +43,10 @@ export const submitOrder = createAppAsyncThunk(
   "order/submitOrder",
   async (params: CartUserInfo, { getState }) => {
     const user = userByIdSelector(getState());
-    const total = userCartTotalSelector(getState());
 
     const response = await axios.post(
       `http://${process.env.REACT_APP_API_URL}/api/order/create`,
-      { ...params, userId: user?.id, total }
+      { ...params, userId: user?.id }
     );
     return response.data;
   }

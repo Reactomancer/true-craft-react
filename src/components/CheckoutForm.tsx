@@ -100,11 +100,12 @@ export const CheckoutComponent: React.FC = () => {
   const [submit, setSubmit] = useState(false);
   const [ccNumber, setCcNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
+  const [totalCountProducts, setTotalCountProducts] = useState<
+    Record<number, number>
+  >({});
   const rate = useAppSelector(conversionSelector);
   const currency = useAppSelector(currencySelector);
   const shippingFee = useAppSelector(shippingFeeSelector);
-
-  console.log({ shippingFee });
 
   const formatAndSetCcNumber = (e) => {
     const inputVal = e.target.value.replace(/ /g, "");
@@ -149,8 +150,22 @@ export const CheckoutComponent: React.FC = () => {
     dispatch(cartSlice.actions.addUserInfo(watch()));
   };
 
+  const totalProdutsCountsSum = Object.entries(totalCountProducts).reduce(
+    (accumulator, [price, count]) => {
+      if (count == null || count < 2) {
+        return accumulator;
+      }
+
+      const calculatedValue = Number(price) * (count - 1);
+      return accumulator + calculatedValue;
+    },
+    0
+  );
+
+  const totalSum = totalProdutsCountsSum + total;
+
   const handleSubmitOrder = (data: CartUserInfo) => {
-    dispatch(submitOrder(data));
+    dispatch(submitOrder({ ...data, total: totalSum }));
   };
 
   const handleDeleteProductFromCart = (productId: number) => {
@@ -166,6 +181,16 @@ export const CheckoutComponent: React.FC = () => {
       );
     },
     [dispatch]
+  );
+
+  const handleSetTotalCountProducts = useCallback(
+    (price: number, count: number) => {
+      setTotalCountProducts((previousValue) => ({
+        ...previousValue,
+        [price]: count,
+      }));
+    },
+    []
   );
 
   return (
@@ -420,7 +445,13 @@ export const CheckoutComponent: React.FC = () => {
                   />
                   <span>{product.productName}</span>
                   <span className="whitespace-nowrap">{convertedPrice}</span>
-                  <NumberInput defaultValue={1} min={1} />
+                  <NumberInput
+                    onChange={(_, count) => {
+                      handleSetTotalCountProducts(product.currentPrice, count);
+                    }}
+                    defaultValue={1}
+                    min={1}
+                  />
                   <DeleteIcon
                     style={{ cursor: "pointer" }}
                     sx={{ fill: "red" }}
@@ -447,7 +478,7 @@ export const CheckoutComponent: React.FC = () => {
             <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
               <span>Total: </span>
               <span>
-                {((rate ?? 1) * total).toFixed(2)} {currency ?? "EGP"}
+                {((rate ?? 1) * totalSum).toFixed(2)} {currency ?? "EGP"}
               </span>
             </div>
           </div>
