@@ -33,4 +33,5 @@ export interface CartInitialState {
   cart?: CartItem[];
   userInfo?: CartUserInfo;
   orderItems?: { orders: Order[] };
+  shippingFee?: number;
 }

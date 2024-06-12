@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Button, TextField, Autocomplete } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Controller, useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userByIdSelector } from "../store/users/selectors";
 import { deleteProductFromCart, submitOrder } from "../store/cart/actions";
 import {
+  shippingFeeSelector,
   userCartDiscountPercentageSelector,
   userCartSelector,
   userCartTotalSelector,
@@ -77,6 +78,20 @@ const deliveryOptions = {
   Usa: ["UPS", "Fedex", "USPS", "DHL"],
 };
 
+const deliveryShippingFees = {
+  "Почта России (6 дней, +100 руб.)": 100,
+  "СДЭК (4 дня, +150 руб.)": 150,
+  "Деловые Линии (14 дней, +50 руб.)": 50,
+  "Nahdi (4 days, +20 EGP)": 20,
+  "Speedex (6 days, +13.5 EGP)": 13.5,
+  "Fedex (8 days, +10 EGP)": 10,
+  "Aramex (14 days, +2.5 EGP)": 2.5,
+  UPS: null,
+  Fedex: null,
+  USPS: null,
+  DHL: null,
+};
+
 export const CheckoutComponent: React.FC = () => {
   const user = useAppSelector(userByIdSelector);
   const cart = useAppSelector(userCartSelector);
@@ -87,6 +102,9 @@ export const CheckoutComponent: React.FC = () => {
   const [expiryDate, setExpiryDate] = useState("");
   const rate = useAppSelector(conversionSelector);
   const currency = useAppSelector(currencySelector);
+  const shippingFee = useAppSelector(shippingFeeSelector);
+
+  console.log({ shippingFee });
 
   const formatAndSetCcNumber = (e) => {
     const inputVal = e.target.value.replace(/ /g, "");
@@ -141,7 +159,14 @@ export const CheckoutComponent: React.FC = () => {
     );
   };
 
-  const shipping = ((total ?? 1) * 0.05).toFixed(2);
+  const handleSetShippingFee = useCallback(
+    (shippingProvider: string) => {
+      dispatch(
+        cartSlice.actions.setShippingFee(deliveryShippingFees[shippingProvider])
+      );
+    },
+    [dispatch]
+  );
 
   return (
     <>
@@ -263,6 +288,8 @@ export const CheckoutComponent: React.FC = () => {
                       <Autocomplete
                         onChange={(_event, newValue) => {
                           onChange(newValue ? newValue : null);
+                          console.log(newValue);
+                          handleSetShippingFee(newValue);
                         }}
                         {...field}
                         options={deliveryOptions[watch("country")] ?? []}
@@ -406,7 +433,10 @@ export const CheckoutComponent: React.FC = () => {
           <div className="bg-[#FDF2E9] flex flex-col justify-center items-center my-20 gap-4 w-[70%]">
             <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
               <span>Shipping: </span>
-              <span>{shipping} EGP</span>
+              <span>
+                {((rate ?? 1) * (shippingFee ?? 0)).toFixed(2)}{" "}
+                {currency ?? "EGP"}
+              </span>
             </div>
             {discount && (
               <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
@@ -416,7 +446,9 @@ export const CheckoutComponent: React.FC = () => {
             )}
             <div className="border-b-2 px-10 w-full py-5 border-[#000000]">
               <span>Total: </span>
-              <span>{(total ?? 1) + Number(shipping)} EGP</span>
+              <span>
+                {((rate ?? 1) * total).toFixed(2)} {currency ?? "EGP"}
+              </span>
             </div>
           </div>
         </div>

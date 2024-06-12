@@ -11,6 +11,9 @@ export const cartSlice = createSlice({
     addUserInfo: (draft, { payload }: PayloadAction<CartUserInfo>) => {
       draft.userInfo = payload;
     },
+    setShippingFee: (draft, { payload }: PayloadAction<number>) => {
+      draft.shippingFee = payload;
+    },
   },
   extraReducers: ({ addCase }) => {
     addCase(getUserCart.fulfilled, (draft, { payload }) => {
