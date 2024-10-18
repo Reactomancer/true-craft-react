@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+# True Craft React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+True Craft React is a web application built using React that showcases various craft beers and allows users to explore and learn about different beer styles.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Browse a collection of craft beers
+- View detailed information about each beer
+- Search for beers by name or style
+- Filter beers by category
+- Responsive design for mobile and desktop devices
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+To run this project locally, follow these steps:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the repository:
+git clone https://github.com/Reactomancer/true-craft-react.git
+
+2. Navigate to the project directory:
+cd true-craft-react
+
+3. Install the dependencies:
+npm install
+
+4. Start the development server:
+npm start
+
+
+5. Open your browser and visit `http://localhost:3000` to view the application.
+
+## Usage
+
+- Use the search bar to find specific beers by name or style
+- Click on a beer card to view more detailed information
+- Use the filter options to narrow down the beer selection by category
+- Navigate through the pages using the pagination controls
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository
+2. Create a new branch for your feature or bug fix
+3. Make your changes and commit them with descriptive commit messages
+4. Push your changes to your fork
+5. Submit a pull request to the main repository
+
+Please ensure that your code adheres to the existing style and includes appropriate tests.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
